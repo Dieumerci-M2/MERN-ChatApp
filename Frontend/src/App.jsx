@@ -1,11 +1,16 @@
 import './App.css'
-import Button from '@mui/material/Button'
-
+import {Routes, Route} from 'react-router-dom'
+import Login from './Pages/Login'
+import Dashboard from './Pages/Dashboard'
 function App() {
 
   return (
     <div className="App">
-       <Button variant="contained">Hello World</Button>
+      <Routes>
+        <Route path='/' element={ <Login />} />
+        <Route path='/chats' element={<Dashboard />} />
+      </Routes>
+      
     </div>
   )
 }
