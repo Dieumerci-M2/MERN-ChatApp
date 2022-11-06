@@ -1,13 +1,15 @@
-import React, {useEffect} from 'react'
+import React, {useState, useEffect} from 'react'
 import { Stack, Button, Typography } from '@mui/material'
 import { AccessAlarm, CloudDone, ThreeDRotation } from '@mui/icons-material';
 import axios from 'axios'
 
 const Dashboard = () => {
+  const [showBackend, setShowBackend] = useState([])
   const fetchData = async() => {
-   await axios.get('https://jsonplaceholder.typicode.com/todos/1')
-  .then(response => console.log(response))
+   await axios.get(import.meta.env.VITE_PORT + '/md/chats')
+  .then(response => setShowBackend(response.data))
   }
+  console.log(showBackend)
 
   useEffect(() => {
     fetchData()
@@ -15,7 +17,7 @@ const Dashboard = () => {
   
   return (
     <Stack spacing={4}>
-      <Typography variant='h1'>ChatApp</Typography>
+      <Typography variant='4'>{ showBackend.menu}</Typography>
       <Stack spacing={2} direction='row'>
         <Button variant="contained">Hello Chats</Button>
         <Button variant="outline">Hello Chats</Button>
