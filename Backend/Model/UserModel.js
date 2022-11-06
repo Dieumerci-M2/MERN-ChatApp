@@ -8,8 +8,17 @@ const UserModel = mongoose.Schema( {
         lowercase : true,
         minLength : 10
     },
-    password: {type : Sting, required : true}
-} )
+    password: { type: Sting, required: true },
+    picture: {
+        type: String,
+        required: true,
+        default : '../assets/chatApp.svg'
+    }
+},
+    {
+    timestamps : true
+    }
+)
 
 const user = mongoose.Model( 'User', UserModel )
 
