@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { Stack, Button, Typography } from '@mui/material'
+import { Stack, Button, Typography, TextField } from '@mui/material'
 import { AccessAlarm, CloudDone, ThreeDRotation } from '@mui/icons-material';
 import axios from 'axios'
 
@@ -26,9 +26,12 @@ const Dashboard = () => {
       <Stack spacing={4} direction= 'row'>
         <Button variant='contained' color='secondary' startIcon={<AccessAlarm/>}> Allarm</Button>
         <Button variant='contained' color='info' endIcon={<ThreeDRotation/>}>Info</Button>
-        <Button variant='contained' color='error'>danger</Button>
+        <Button variant='contained' color='error' startIcon={<CloudDone/>}>danger</Button>
         <Button variant='contained' color='warning'>Warning</Button>
         <Button variant='contained' color='success' >Success</Button>
+      </Stack>
+      <Stack spacing={2} direction='row'>
+        <TextField label='Name' variant='filled' size='small'></TextField>
       </Stack>
     </Stack>
   )
