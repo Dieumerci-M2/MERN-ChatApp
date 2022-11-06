@@ -1,22 +1,22 @@
-const mongoDB = require( 'mongoose' )
+const mongoose = require( 'mongoose' )
 
 
-const ModelChats = mongoose.schemas(
+const ModelChats = mongoose.Schema(
     {
         chatName: { type: String, trim: true },
         isGroupChat: { type: Boolean, default: false },
         userChat: [
             {
-                type: mongoose.schemas.Types.ObjectId,
+                type: mongoose.Schema.Types.ObjectId,
                 ref : 'User'
             }
         ],
         latestMessages: {
-            type: mongoose.schemas.Types.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,
             ref: 'Message'
         },
         groupAdmin: {
-            type: mongoose.schemas.Types.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,
             ref : 'User'
         },
        
