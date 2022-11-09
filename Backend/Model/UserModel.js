@@ -6,12 +6,12 @@ const UserModel = mongoose.Schema( {
         type : String,
         required : true,
         lowercase : true,
-        minLength : 10
+        minLength: 10,
+        unique: true
     },
     password: { type: Sting, required: true },
     picture: {
         type: String,
-        required: true,
         default : '../assets/chatApp.svg'
     }
 },
