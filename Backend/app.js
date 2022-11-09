@@ -2,7 +2,8 @@ const express = require( 'express' )
 const dotenv = require('dotenv')
 const app = express()
 const ConnectionDB = require('./data/db')
-
+const colors = require( 'colors' )
+const userRoute = require('./Routes/UserRoute')
 const Port = process.env.Port || 6500
 dotenv.config()
 ConnectionDB()
@@ -11,17 +12,10 @@ app.use( (req, res, next) => {
     res.setHeader( 'Access-Control-Allow-Origin', '*' );
     next();
 })
-app.get( '/md', ( req, res ) => {
-    res.send('Hello API')
+app.get( '/', ( req, res ) => {
+    res.send('API is Runnig verry Well')
 } )
-
-app.get( '/md/chats', ( req, res ) => {
-    
-} )
-
-app.get( '/md/chats/:id', ( req, res ) => {
-    
-} )
+app.get( '/api/user', userRoute)
 
 app.options(/.*/,( req, res ) => {
     res.setHeader( 'Access-Control-Allow-Methods', 'POST, GET, OPTIONS' );
@@ -29,4 +23,4 @@ app.options(/.*/,( req, res ) => {
     res.end();
 })
 
-app.listen(Port, ()=>console.log(`server is running to port http://localhost:${Port}`))
+app.listen(Port, ()=>console.log(`server is running to port http://localhost:${Port}`.yellow.bold))
