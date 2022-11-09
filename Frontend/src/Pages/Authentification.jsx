@@ -3,7 +3,7 @@ import { Stack, Button, TextField, Container, InputAdornment, Box, Tabs, Tab, Ty
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
-const Login = () => {
+const Authentification = () => {
   const [ value, setValue ] = useState( 0 )
   const [ LogEmail, setLogEmail ] = useState()
   const [ LogPassword, setLogPassword ] = useState()
@@ -45,8 +45,8 @@ const Login = () => {
               <Stack spacing={ 2 }>
                 <TextField label='Name' variant='outlined' size='small' type='name' required={true} onChange={(e)=> setSignName(e.target.value)}></TextField>
                 <TextField label='Email' variant='outlined' size='small' type='mail' required={true} onChange={(e)=> setSignEmail(e.target.value)}></TextField>
-                <TextField label='Password' variant='outlined' size='small' type={show} required={ true } onChange={ ( e ) => setSignPassword(e.target.value) } InputProps={ { endAdornment: <InputAdornment position='end'><Button variant='text' endIcon={ <RemoveRedEyeIcon /> }></Button></InputAdornment> } }></TextField>
-                  <TextField label='Confirm Password' variant='outlined' size='small' type={show} required={true} onChange={(e)=> setSignConfirmPassword(e.target.value)} InputProps={ { endAdornment: <InputAdornment position='end'><Button variant='text' endIcon={ <RemoveRedEyeIcon /> }></Button></InputAdornment> } }></TextField>
+                <TextField label='Password' variant='outlined' size='small' type={hiden ? 'password': ''} required={ true } onChange={ ( e ) => setSignPassword(e.target.value) } InputProps={ { endAdornment: <InputAdornment position='end'><Button variant='text' onClick={handlePassword} endIcon={ hiden ? <VisibilityOffIcon/> : <VisibilityIcon/> }></Button></InputAdornment> } }></TextField>
+                  <TextField label='Confirm Password' variant='outlined' size='small' type={hiden ? 'password': ''} required={true} onChange={(e)=> setSignConfirmPassword(e.target.value)} InputProps={ { endAdornment: <InputAdornment position='end'><Button variant='text' onClick={handlePassword} endIcon={ hiden ? <VisibilityOffIcon/> : <VisibilityIcon/>}></Button></InputAdornment> } }></TextField>
               </Stack>
               <Stack mt= {2} mb= {2}>
                 <Typography variant="body1" color="initial">Upload your Picture</Typography>
@@ -64,4 +64,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default Authentification
