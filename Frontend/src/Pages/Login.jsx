@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import { Stack, Button, TextField, Container, InputAdornment, Box, Tabs, Tab, Typography } from '@mui/material'
-import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 const Login = () => {
   const [ value, setValue ] = useState( 0 )
@@ -11,17 +12,12 @@ const Login = () => {
   const [ SignPassword, setSignPassword ] = useState()
   const [ SignConfirmPassword, setSignConfirmPassword ] = useState()
   const [ pic, setPic ] = useState()
-  const [ show, setShow ] = useState( 'password' )
   const [hiden, setHiden] = useState(true)
   
   const handlePassword = () => {
      setHiden( !hiden )
-    if ( hiden ) {
-      setShow('')
-    } else {
-      setShow('password')
-    }
   }
+  
   const changeTabs = (event, newTab) => {
     setValue(newTab)
   }
@@ -30,7 +26,8 @@ const Login = () => {
       <Stack spacing={ 2 } mt={ 15 } sx={ { backgroundColor: 'white', borderRadius: '10px', } }>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <Tabs value={value} onChange={changeTabs} aria-label="basic tabs example">
-            <Tab label="Login" />
+            <Tab label="Login" />eyeseyes
+
             <Tab label="Sign-Up" />
           </Tabs>
         </Box>
@@ -38,7 +35,7 @@ const Login = () => {
           {value === 0 && (
           <Stack spacing={ 2 }>
             <TextField label='Email' variant='outlined' size='small' type='mail' required={true} onChange={(e)=> setLogEmail(e.target.value)}></TextField>
-              <TextField label='Password' variant='outlined' size='small' type={show} required={ true } onChange={ ( e ) => setLogPassword(e.target.value)} InputProps={{endAdornment: <InputAdornment position='end'><Button variant='text' endIcon={<RemoveRedEyeIcon/>} onClick={()=>handlePassword}></Button></InputAdornment>}}></TextField>
+              <TextField label='Password' variant='outlined' size='small' type={hiden ? 'password': ''} required={ true } onChange={ ( e ) => setLogPassword(e.target.value)} InputProps={{endAdornment: <InputAdornment position='end'><Button variant='text' onClick={handlePassword} endIcon={hiden ? <VisibilityOffIcon/> : <VisibilityIcon/>}></Button></InputAdornment>}}></TextField>
             <Button variant='contained'>Connexion</Button>
             <Button variant='text' >forgoted password</Button>
           </Stack>
@@ -54,7 +51,7 @@ const Login = () => {
               <Stack mt= {2} mb= {2}>
                 <Typography variant="body1" color="initial">Upload your Picture</Typography>
                 <Stack direction = 'row' spacing={ 2 } mt= {2} mb= {2}>
-                  <Button variant='outlined' sx={ { color: '' } }>upload</Button>
+                  <Button variant='outlined'>upload</Button>
                   <Typography>No picture choosen</Typography>
                 </Stack>
                 <Button variant='contained' mt={2}>Create an account</Button>
