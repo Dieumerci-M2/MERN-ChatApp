@@ -26,8 +26,7 @@ const Authentification = () => {
       <Stack spacing={ 2 } mt={ 15 } sx={ { backgroundColor: 'white', borderRadius: '10px', } }>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <Tabs value={value} onChange={changeTabs} aria-label="basic tabs example">
-            <Tab label="Login" />eyeseyes
-
+            <Tab label="Login" />
             <Tab label="Sign-Up" />
           </Tabs>
         </Box>
@@ -48,11 +47,10 @@ const Authentification = () => {
                 <TextField label='Password' variant='outlined' size='small' type={hiden ? 'password': ''} required={ true } onChange={ ( e ) => setSignPassword(e.target.value) } InputProps={ { endAdornment: <InputAdornment position='end'><Button variant='text' onClick={handlePassword} endIcon={ hiden ? <VisibilityOffIcon/> : <VisibilityIcon/> }></Button></InputAdornment> } }></TextField>
                   <TextField label='Confirm Password' variant='outlined' size='small' type={hiden ? 'password': ''} required={true} onChange={(e)=> setSignConfirmPassword(e.target.value)} InputProps={ { endAdornment: <InputAdornment position='end'><Button variant='text' onClick={handlePassword} endIcon={ hiden ? <VisibilityOffIcon/> : <VisibilityIcon/>}></Button></InputAdornment> } }></TextField>
               </Stack>
-              <Stack mt= {2} mb= {2}>
+              <Stack id='pic' mt= {2} mb= {2}>
                 <Typography variant="body1" color="initial">Upload your Picture</Typography>
                 <Stack direction = 'row' spacing={ 2 } mt= {2} mb= {2}>
-                  <Button variant='outlined'>upload</Button>
-                  <Typography>No picture choosen</Typography>
+                  <TextField variant='outlined' size='small' type='file'></TextField>
                 </Stack>
                 <Button variant='contained' mt={2}>Create an account</Button>
               </Stack>
