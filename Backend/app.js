@@ -5,17 +5,22 @@ const ConnectionDB = require('./config/db')
 const colors = require( 'colors' )
 const userRoute = require('./Routes/UserRoute')
 const Port = process.env.Port || 6500
+
 dotenv.config()
+
 ConnectionDB()
 
 app.use( (req, res, next) => {
     res.setHeader( 'Access-Control-Allow-Origin', '*' );
     next();
-})
+} )
+
+app.use( express.json() )
+
 app.get( '/', ( req, res ) => {
     res.send('API is Runnig verry Well')
 } )
-app.get( '/api/user', userRoute)
+app.use( '/api/user', userRoute)
 
 app.options(/.*/,( req, res ) => {
     res.setHeader( 'Access-Control-Allow-Methods', 'POST, GET, OPTIONS' );

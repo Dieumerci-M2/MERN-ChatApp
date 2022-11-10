@@ -9,7 +9,7 @@ const UserModel = mongoose.Schema( {
         minLength: 10,
         unique: true
     },
-    password: { type: Sting, required: true },
+    password: { type: String, required: true },
     picture: {
         type: String,
         default : '../assets/chatApp.svg'
@@ -20,6 +20,6 @@ const UserModel = mongoose.Schema( {
     }
 )
 
-const user = mongoose.Model( 'User', UserModel )
+const User = mongoose.model( 'User', UserModel )
 
-module.exports = user
+module.exports = User
