@@ -1,8 +1,9 @@
 const asyncHandler = require( 'express-async-handler' )
 const User = require('../Model/UserModel')
-const generateToken = require('../config/generateToken')
+const generateToken = require( '../config/generateToken' )
+const bcrypt=require("bcrypt")
 
-const registerUser = asyncHandler(async(req, res) => {
+const registerUser = async(req, res) => {
     const { name, email, password, picture } = req.body
 
     if ( !name || !email || !password ) {
@@ -38,6 +39,33 @@ const registerUser = asyncHandler(async(req, res) => {
         throw new error('user not found')
     }
     
-} )
+} 
 
-module.exports = { registerUser };
+const authUser =  async (req, res,next) => {
+    
+
+    try {
+    const { email, password } = req.body
+    const user = await User.findOne( { email } )
+        if (!user) {
+              return res.json( {
+                  message: "pas d'utilisateur a cet email",
+                  statut:false
+        }) 
+        }
+        const isOk = await bcrypt.compare( password, user.password )
+        if (!isOk) {
+            return res.json( {
+                message: "mot de passe incorrect",
+                statut:false
+            })
+        }
+        delete user.password
+        res.json({message:"bien enregistre",user})
+    } catch(ex) {
+        
+        next(ex)
+    }
+}
+
+module.exports = { registerUser, authUser };
