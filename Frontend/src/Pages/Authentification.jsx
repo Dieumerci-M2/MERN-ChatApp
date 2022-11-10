@@ -21,6 +21,12 @@ const Authentification = () => {
   const changeTabs = (event, newTab) => {
     setValue(newTab)
   }
+  const submitHandler = () => {
+    console.log(first)
+  }
+  const postDeatils = (tof) => {
+    console.log('object');
+  }
   return (
     <Container maxWidth="sm" >
       <Stack spacing={ 2 } mt={ 15 } sx={ { backgroundColor: 'white', borderRadius: '10px', } }>
@@ -50,9 +56,9 @@ const Authentification = () => {
               <Stack id='pic' mt= {2} mb= {2}>
                 <Typography variant="body1" color="initial">Upload your Picture</Typography>
                 <Stack direction = 'row' spacing={ 2 } mt= {2} mb= {2}>
-                  <TextField variant='outlined' size='small' type='file'></TextField>
+                  <TextField variant='outlined' size='small' type='file' p={1.5} accept='image/*' onChange={(e)=> postDeatils(e.target.files[0])}></TextField>
                 </Stack>
-                <Button variant='contained' mt={2}>Create an account</Button>
+                <Button variant='contained' mt={2} onClick={submitHandler}>Create an account</Button>
               </Stack>
           </Stack>
           )}
