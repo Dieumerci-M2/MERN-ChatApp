@@ -25,8 +25,8 @@ UserModel.methods.matchPassword = async (enterPassword) => {
     return bcrypt.compare(enterPassword, this.password)
 }
 
-UserModel.pre( 'save', async ( next ) => {
-    if ( !this.modified ) {
+UserModel.pre( 'save', async function ( next ){
+    if ( !this.isModified ) {
         next()
     }
     const salt = await bcrypt.genSalt( 10 )
