@@ -1,7 +1,7 @@
 const express = require( 'express' )
 const dotenv = require('dotenv')
 const app = express()
-const ConnectionDB = require('./data/db')
+const ConnectionDB = require('./config/db')
 const colors = require( 'colors' )
 const userRoute = require('./Routes/UserRoute')
 const Port = process.env.Port || 6500
