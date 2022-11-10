@@ -40,4 +40,8 @@ const registerUser = asyncHandler(async(req, res) => {
     
 } )
 
+const authUser = asyncHandler( async () => {
+    
+})
+
 module.exports = { registerUser };
