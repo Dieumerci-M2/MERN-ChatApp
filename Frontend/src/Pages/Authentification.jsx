@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-import { Stack, Button, TextField, Container, InputAdornment, Box, Tabs, Tab, Typography } from '@mui/material'
+import React, { useState } from 'react'
+import { Stack, Button, TextField, Container, InputAdornment, Box, Tabs, Tab, Typography, Alert, Snackbar} from '@mui/material'
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
@@ -12,7 +12,10 @@ const Authentification = () => {
   const [ SignPassword, setSignPassword ] = useState()
   const [ SignConfirmPassword, setSignConfirmPassword ] = useState()
   const [ pic, setPic ] = useState()
-  const [hiden, setHiden] = useState(true)
+  const [upload, setUpload] = useState(false)
+  const [ hiden, setHiden ] = useState( true )
+  const [ image, setImage ] = useState()
+  
   
   const handlePassword = () => {
      setHiden( !hiden )
@@ -24,8 +27,47 @@ const Authentification = () => {
   const submitHandler = () => {
     console.log(first)
   }
-  const postDeatils = (tof) => {
-    console.log('object');
+  const postDetails = ( tof ) => {
+    setUpload( true )
+    if ( tof === undefined ) {
+      setImage(
+        <Snackbar open={ open } autoHideDuration={ 6000 }>
+          <Alert severity="warning" sx={ { width: '100%' } }>
+            Please upload an image!
+          </Alert>
+        </Snackbar> );
+      return;
+    }
+    if ( tof.type === 'image/pjeg' || tof.type === 'image/png' ) {
+      const data = new FormData()
+      data.append( 'file', 'tof' )
+      data.append( 'upload_preset', 'chat-app' )
+      data.append( 'cloud_name', 'md-chatapp-mern' )
+      
+      fetch( 'https://api.cloudinary.com/v1_1/md-chatapp-mern/image/upload', {
+        method: 'post',
+        body: data,
+      } ).then( res => res.json() )
+        .then( data => {
+          setPic( data.url.toString() )
+          console.log( data.url.toString() );
+          setUpload(false)
+        } )
+        .catch( ( err ) => {
+          console.log( err );
+          setUpload(false)
+        })
+      
+    } else {
+       setImage(
+        <Snackbar open={ open } autoHideDuration={ 6000 }>
+          <Alert severity="warning" sx={ { width: '100%' } }>
+            Please upload an image!
+          </Alert>
+         </Snackbar> );
+      setUpload( false )
+      return;
+    }
   }
   return (
     <Container maxWidth="sm" >
@@ -56,9 +98,9 @@ const Authentification = () => {
               <Stack id='pic' mt= {2} mb= {2}>
                 <Typography variant="body1" color="initial">Upload your Picture</Typography>
                 <Stack direction = 'row' spacing={ 2 } mt= {2} mb= {2}>
-                  <TextField variant='outlined' size='small' type='file' p={1.5} accept='image/*' onChange={(e)=> postDeatils(e.target.files[0])}></TextField>
+                  <TextField variant='outlined' size='small' type='file' p={1.5} accept='image/*' onChange={(e)=> postDetails(e.target.files[0])}></TextField>
                 </Stack>
-                <Button variant='contained' mt={2} onClick={submitHandler}>Create an account</Button>
+                <Button variant='contained' mt={2} onClick={submitHandler} loading={upload}>Create an account</Button>
               </Stack>
           </Stack>
           )}
