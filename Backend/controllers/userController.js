@@ -63,7 +63,6 @@ const authUser =  async (req, res,next) => {
         delete user.password
         res.json({message:"bien enregistre",user})
     } catch(ex) {
-        
         next(ex)
     }
 }

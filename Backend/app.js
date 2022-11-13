@@ -3,7 +3,8 @@ const dotenv = require('dotenv')
 const app = express()
 const ConnectionDB = require('./config/db')
 const colors = require( 'colors' )
-const userRoute = require('./Routes/UserRoute')
+const userRoute = require( './Routes/UserRoute' )
+const notFound = require('./middlewares/errorMiddleware')
 const Port = process.env.Port || 6600
 
 dotenv.config()
@@ -23,8 +24,8 @@ app.get( '/', ( req, res ) => {
 
 app.use( '/api/user', userRoute )
 
-// app.user( notfound )
-// app.user(errorHandler)
+app.use( notFound )
+
 
 app.options(/.*/,( req, res ) => {
     res.setHeader( 'Access-Control-Allow-Methods', 'POST, GET, OPTIONS' );
