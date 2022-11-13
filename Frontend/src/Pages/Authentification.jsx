@@ -25,32 +25,29 @@ const Authentification = () => {
     setValue(newTab)
   }
   const submitHandler = () => {
-    console.log(first)
+    console.log('hey')
   }
   const postDetails = ( tof ) => {
     setUpload( true )
     if ( tof === undefined ) {
-      setImage(
-        <Snackbar open={ open } autoHideDuration={ 6000 }>
-          <Alert severity="warning" sx={ { width: '100%' } }>
-            Please upload an image!
-          </Alert>
-        </Snackbar> );
+      
+      alert('please enter an image')
       return;
     }
-    if ( tof.type === 'image/pjeg' || tof.type === 'image/png' ) {
+
+    if ( tof.type === 'image/pjeg' || tof.type === 'image/png' || tof.type === 'image/jpg') {
       const data = new FormData()
-      data.append( 'file', 'tof' )
+      data.append( 'file', tof )
       data.append( 'upload_preset', 'chat-app' )
       data.append( 'cloud_name', 'md-chatapp-mern' )
       
       fetch( 'https://api.cloudinary.com/v1_1/md-chatapp-mern/image/upload', {
-        method: 'post',
+        method: 'POST',
         body: data,
       } ).then( res => res.json() )
         .then( data => {
-          setPic( data.url.toString() )
-          console.log( data.url.toString() );
+          setPic( data)
+          console.log( data);
           setUpload(false)
         } )
         .catch( ( err ) => {
@@ -59,14 +56,9 @@ const Authentification = () => {
         })
       
     } else {
-       setImage(
-        <Snackbar open={ open } autoHideDuration={ 6000 }>
-          <Alert severity="warning" sx={ { width: '100%' } }>
-            Please upload an image!
-          </Alert>
-         </Snackbar> );
+       
+      alert('please upload an image')
       setUpload( false )
-      return;
     }
   }
   return (
@@ -100,7 +92,7 @@ const Authentification = () => {
                 <Stack direction = 'row' spacing={ 2 } mt= {2} mb= {2}>
                   <TextField variant='outlined' size='small' type='file' p={1.5} accept='image/*' onChange={(e)=> postDetails(e.target.files[0])}></TextField>
                 </Stack>
-                <Button variant='contained' mt={2} onClick={submitHandler} loading={upload}>Create an account</Button>
+                <Button variant='contained' mt={2} isloading={upload ? 'loadind' : 'fetch'} onClick={submitHandler} >Create an account</Button>
               </Stack>
           </Stack>
           )}
