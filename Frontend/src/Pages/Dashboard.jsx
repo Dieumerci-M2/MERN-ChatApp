@@ -1,23 +1,13 @@
-import React, {useState, useEffect} from 'react'
-import { Stack, Button, Typography, TextField } from '@mui/material'
+import React from 'react'
+import { Stack, Button, TextField } from '@mui/material'
 import { AccessAlarm, CloudDone, ThreeDRotation } from '@mui/icons-material';
-import axios from 'axios'
+
 
 const Dashboard = () => {
-  const [showBackend, setShowBackend] = useState([])
-  const fetchData = async() => {
-   await axios.get(import.meta.env.VITE_PORT + '/md/chats')
-  .then(response => setShowBackend(response.data))
-  }
-  console.log( showBackend )
-  
-  useEffect(() => {
-    fetchData()
-  }, [])
+ 
   
   return (
     <Stack spacing={4}>
-      <Typography variant='4'>{ showBackend.menu}</Typography>
       <Stack spacing={2} direction='row'>
         <Button variant="contained">Hello Chats</Button>
         <Button variant="outline">Hello Chats</Button>

@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import axios from 'axios'
+import { useNavigate} from 'react-router-dom'
 import { Stack, Button, TextField, Container, InputAdornment, Box, Tabs, Tab, Typography, Alert, Snackbar} from '@mui/material'
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
@@ -8,30 +10,93 @@ const Authentification = () => {
   const [ LogEmail, setLogEmail ] = useState()
   const [ LogPassword, setLogPassword ] = useState()
   const [ SignName, setSignName ] = useState()
-  const [ SingEmail, setSignEmail ] = useState()
+  const [ SignEmail, setSignEmail ] = useState()
   const [ SignPassword, setSignPassword ] = useState()
   const [ SignConfirmPassword, setSignConfirmPassword ] = useState()
   const [ pic, setPic ] = useState()
   const [upload, setUpload] = useState(false)
   const [ hiden, setHiden ] = useState( true )
-  const [ image, setImage ] = useState()
   
+  const navigateTo = useNavigate()
   
   const handlePassword = () => {
      setHiden( !hiden )
   }
+  const ConnectHandler = async() => {
+    setUpload( true )
+    if ( !LogEmail || !LogPassword ) {
+      console.log( 'complete all the field' );
+      setUpload( false )
+      return
+    }
   
+    try {
+       const config = {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        mode : 'cors'
+       }
+      
+      const { data } = await axios.post( "http://localhost:6600/api/user/login", { email: LogEmail, password: LogPassword }, config )
+      
+       console.log( 'registration successful' )
+      
+      localStorage.setItem( 'InfoUser', JSON.stringify(data))
+      navigateTo( '/chats' )
+      setUpload(false)
+
+      
+    } catch (error) {
+      console.log(`You haven't an Account please create an account`);
+      console.log(error);
+      setUpload(false)
+    }
+  }
   const changeTabs = (event, newTab) => {
-    setValue(newTab)
+    setValue( newTab )
   }
-  const submitHandler = () => {
-    console.log('hey')
+  const submitHandler = async() => {
+    setUpload( true )
+    if ( !SignName || !SignEmail || !SignPassword || !SignConfirmPassword ) {
+      console.log( 'please complete all the field' )
+      setUpload(false)
+    }
+    if ( SignPassword !== SignConfirmPassword ) {
+      console.log('please enter the some password')
+      setUpload(false)
+    }
+    
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        mode : 'cors'
+      }
+  
+      const data  = await (fetch( 'http://localhost:6600/api/user', {
+        method: 'POST',
+        ...config,
+        body: new URLSearchParams( { nom : SignName, email : SignEmail, password : SignPassword, picture : pic })
+      } ).then(data => data.json()))
+      
+      console.log( 'registration successful' )
+      
+      localStorage.setItem( 'data', JSON.stringify(data))
+      navigateTo( '/chats' )
+
+    } catch (error) {
+      console.log('Error occured on the server');
+      console.log(error);
+      setUpload(false)
+    }
   }
-  const postDetails = ( tof ) => {
+  const postDetails = async( tof ) => {
     setUpload( true )
     if ( tof === undefined ) {
       
-      alert('please enter an image')
+      console.log('Enter an Image');
       return;
     }
 
@@ -41,7 +106,7 @@ const Authentification = () => {
       data.append( 'upload_preset', 'chat-app' )
       data.append( 'cloud_name', 'md-chatapp-mern' )
       
-      fetch( 'https://api.cloudinary.com/v1_1/md-chatapp-mern/image/upload', {
+      await fetch( 'https://api.cloudinary.com/v1_1/md-chatapp-mern/image/upload', {
         method: 'POST',
         body: data,
       } ).then( res => res.json() )
@@ -57,7 +122,7 @@ const Authentification = () => {
       
     } else {
        
-      alert('please upload an image')
+      console.log('An Error occured');
       setUpload( false )
     }
   }
@@ -75,7 +140,7 @@ const Authentification = () => {
           <Stack spacing={ 2 }>
             <TextField label='Email' variant='outlined' size='small' type='mail' required={true} onChange={(e)=> setLogEmail(e.target.value)}></TextField>
               <TextField label='Password' variant='outlined' size='small' type={hiden ? 'password': ''} required={ true } onChange={ ( e ) => setLogPassword(e.target.value)} InputProps={{endAdornment: <InputAdornment position='end'><Button variant='text' onClick={handlePassword} endIcon={hiden ? <VisibilityOffIcon/> : <VisibilityIcon/>}></Button></InputAdornment>}}></TextField>
-            <Button variant='contained'>Connexion</Button>
+            <Button variant='contained' onClick={ConnectHandler}>Connexion</Button>
             <Button variant='text' >forgoted password</Button>
           </Stack>
           )}

@@ -1,26 +1,27 @@
-const asyncHandler = require( 'express-async-handler' )
+
 const User = require('../Model/UserModel')
 const generateToken = require( '../config/generateToken' )
 const bcrypt=require("bcrypt")
 
 const registerUser = async(req, res) => {
-    const { name, email, password, picture } = req.body
+    const { nom, email, password, picture } = req.body
+    console.log(req.body)
 
-    if ( !name || !email || !password ) {
+    if ( !nom || !email || !password ) {
 
         res.status( 400 )
-        throw new error('Please complete all the field')
+        throw new Error('Please complete all the field')
     } 
     
     const existUser = await User.findOne( { email } )
     
     if ( existUser ) {
         res.status( 400 )
-        throw new error('This user are already exist')
+        throw new Error('This user are already exist')
     }
 
     const user = await User.create( {
-        name,
+        nom,
         email, 
         password,
         picture,
@@ -29,14 +30,14 @@ const registerUser = async(req, res) => {
     if ( user ) {
         res.status( 201 ).json( {
             _id: user._id,
-            name: user.name,
+            nom: user.nom,
             password: user.password,
             picture: user.picture,
             token: generateToken(user._id)
         })
     } else {
         res.status( 404 )
-        throw new error('user not found')
+        throw new Error('user not found')
     }
     
 } 
