@@ -22,11 +22,39 @@ const Authentification = () => {
   const handlePassword = () => {
      setHiden( !hiden )
   }
-  const ConnectHandler = () => {
-    
+  const ConnectHandler = async() => {
+    setUpload( true )
+    if ( !LogEmail || !LogPassword ) {
+      console.log( 'complete all the field' );
+      setUpload( false )
+      return
+    }
+  
+    try {
+       const config = {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        mode : 'cors'
+       }
+      
+      const { data } = await axios.post( "http://localhost:6600/api/user/login", { email: LogEmail, password: LogPassword }, config )
+      
+       console.log( 'registration successful' )
+      
+      localStorage.setItem( 'InfoUser', JSON.stringify(data))
+      navigateTo( '/chats' )
+      setUpload(false)
+
+      
+    } catch (error) {
+      console.log(`You haven't an Account please create an account`);
+      console.log(error);
+      setUpload(false)
+    }
   }
   const changeTabs = (event, newTab) => {
-    setValue(newTab)
+    setValue( newTab )
   }
   const submitHandler = async() => {
     setUpload( true )
@@ -46,7 +74,7 @@ const Authentification = () => {
         },
         mode : 'cors'
       }
-      console.log('hay');
+  
       const data  = await (fetch( 'http://localhost:6600/api/user', {
         method: 'POST',
         ...config,
