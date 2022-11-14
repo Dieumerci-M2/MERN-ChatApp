@@ -16,21 +16,23 @@ app.use( (req, res, next) => {
     next();
 } )
 
-app.use( express.json() )
+// app.use( express.json() )
+app.use( express.urlencoded({extended: false}) )
 
 app.get( '/', ( req, res ) => {
     res.send('API is Runnig verry Well')
 } )
 
+app.options(/.*/,( req, res ) => {
+    res.setHeader( 'Access-Control-Allow-Methods', 'POST, GET, OPTIONS' );
+    res.setHeader( 'Access-Control-Allow-Headers', '*' );
+    res.setHeader( 'Access-Control-Allow-Origin',`http://${req.hostname}:5173`)
+    res.end();
+})
 app.use( '/api/user', userRoute )
 
 app.use( notFound )
 
 
-app.options(/.*/,( req, res ) => {
-    res.setHeader( 'Access-Control-Allow-Methods', 'POST, GET, OPTIONS' );
-    res.setHeader( 'Access-Control-Allow-Headers', '*' );
-    res.end();
-})
 
 app.listen(Port, ()=>console.log(`server is running to port http://localhost:${Port}`.yellow.bold))
