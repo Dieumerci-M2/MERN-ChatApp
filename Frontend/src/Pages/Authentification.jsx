@@ -22,7 +22,9 @@ const Authentification = () => {
   const handlePassword = () => {
      setHiden( !hiden )
   }
-  
+  const ConnectHandler = () => {
+    
+  }
   const changeTabs = (event, newTab) => {
     setValue(newTab)
   }
@@ -48,7 +50,7 @@ const Authentification = () => {
       const data  = await (fetch( 'http://localhost:6600/api/user', {
         method: 'POST',
         ...config,
-        body: new URLSearchParams( { nom: 'pitchP4', email: 'pitchP4@gmail.com', password: '54321' })
+        body: new URLSearchParams( { nom : SignName, email : SignEmail, password : SignPassword, picture : pic })
       } ).then(data => data.json()))
       
       console.log( 'registration successful' )
@@ -110,7 +112,7 @@ const Authentification = () => {
           <Stack spacing={ 2 }>
             <TextField label='Email' variant='outlined' size='small' type='mail' required={true} onChange={(e)=> setLogEmail(e.target.value)}></TextField>
               <TextField label='Password' variant='outlined' size='small' type={hiden ? 'password': ''} required={ true } onChange={ ( e ) => setLogPassword(e.target.value)} InputProps={{endAdornment: <InputAdornment position='end'><Button variant='text' onClick={handlePassword} endIcon={hiden ? <VisibilityOffIcon/> : <VisibilityIcon/>}></Button></InputAdornment>}}></TextField>
-            <Button variant='contained'>Connexion</Button>
+            <Button variant='contained' onClick={ConnectHandler}>Connexion</Button>
             <Button variant='text' >forgoted password</Button>
           </Stack>
           )}
