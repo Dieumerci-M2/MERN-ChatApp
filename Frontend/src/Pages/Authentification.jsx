@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate} from 'react-router-dom'
 import { Stack, Button, TextField, Container, InputAdornment, Box, Tabs, Tab, Typography, Alert, Snackbar} from '@mui/material'
 import VisibilityIcon from '@mui/icons-material/Visibility';
@@ -19,13 +21,21 @@ const Authentification = () => {
   
   const navigateTo = useNavigate()
   
+  const toastOptions = {
+    position: "bottom-right",
+    autoClose: 8000,
+    pauseOnHover: true,
+    draggable: true,
+    theme: "dark",
+  };
+
   const handlePassword = () => {
      setHiden( !hiden )
   }
   const ConnectHandler = async() => {
     setUpload( true )
     if ( !LogEmail || !LogPassword ) {
-      console.log( 'complete all the field' );
+      toast.error( 'complete all the field' , toastOptions)
       setUpload( false )
       return
     }
@@ -40,7 +50,7 @@ const Authentification = () => {
       
       const { data } = await axios.post( "http://localhost:6600/api/user/login", { email: LogEmail, password: LogPassword }, config )
       
-       console.log( 'registration successful' )
+       toast.success( 'registration successful', toastOptions )
       
       localStorage.setItem( 'InfoUser', JSON.stringify(data))
       navigateTo( '/chats' )
@@ -48,8 +58,7 @@ const Authentification = () => {
 
       
     } catch (error) {
-      console.log(`You haven't an Account please create an account`);
-      console.log(error);
+      toast.error(`You haven't an Account please create an account`, toastOptions);
       setUpload(false)
     }
   }
@@ -59,11 +68,11 @@ const Authentification = () => {
   const submitHandler = async() => {
     setUpload( true )
     if ( !SignName || !SignEmail || !SignPassword || !SignConfirmPassword ) {
-      console.log( 'please complete all the field' )
+      toast.warning( 'please complete all the field', toastOptions )
       setUpload(false)
     }
     if ( SignPassword !== SignConfirmPassword ) {
-      console.log('please enter the some password')
+      toast.warning('please enter the some password', toastOptions)
       setUpload(false)
     }
     
@@ -81,14 +90,13 @@ const Authentification = () => {
         body: new URLSearchParams( { nom : SignName, email : SignEmail, password : SignPassword, picture : pic })
       } ).then(data => data.json()))
       
-      console.log( 'registration successful' )
+      toast.success( 'registration successful', toastOptions )
       
       localStorage.setItem( 'data', JSON.stringify(data))
       navigateTo( '/chats' )
 
     } catch (error) {
-      console.log('Error occured on the server');
-      console.log(error);
+      toast.error('Error occured on the server', toastOptions);
       setUpload(false)
     }
   }
@@ -96,7 +104,7 @@ const Authentification = () => {
     setUpload( true )
     if ( tof === undefined ) {
       
-      console.log('Enter an Image');
+      toast.warning( 'Enter an Image', toastOptions)
       return;
     }
 
@@ -112,22 +120,21 @@ const Authentification = () => {
       } ).then( res => res.json() )
         .then( data => {
           setPic( data)
-          console.log( data);
           setUpload(false)
         } )
         .catch( ( err ) => {
-          console.log( err );
+          toast.error( err, toastOptions)
           setUpload(false)
         })
       
     } else {
        
-      console.log('An Error occured');
+      toast.error('An Error occured', toastOptions);
       setUpload( false )
     }
   }
   return (
-    <Container maxWidth="sm" >
+    <Container maxWidth="sm">
       <Stack spacing={ 2 } mt={ 15 } sx={ { backgroundColor: 'white', borderRadius: '10px', } }>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <Tabs value={value} onChange={changeTabs} aria-label="basic tabs example">
@@ -163,6 +170,7 @@ const Authentification = () => {
           )}
         </Box>
       </Stack>
+      <ToastContainer />
     </Container>
   )
 }
