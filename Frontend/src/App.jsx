@@ -10,7 +10,6 @@ function App() {
         <Route path='/' element={ <Authentification />} />
         <Route path='/chats' element={<Dashboard />} />
       </Routes>
-      
     </div>
   )
 }
