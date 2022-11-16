@@ -1,17 +1,21 @@
 import React from 'react'
 import Sidebar from '../components/Principal/Sidebar';
 import Feed from '../components/Principal/Feed';
-import { Stack, Button, TextField, Container } from '@mui/material'
+import Navbar from '../components/Principal/Navbar';
+import { Stack, Box } from '@mui/material'
 import { AccessAlarm, CloudDone, ThreeDRotation } from '@mui/icons-material';
 
 
 const Dashboard = () => {
  
   return (
-    <div>
-      <Sidebar />
-      <Feed />
-    </div>
+    <Box>
+      <Navbar />
+      <Stack direction='row' spacing={2} sx={{justifyContent:'space-between'}}>
+        <Sidebar />
+        <Feed />
+      </Stack>
+    </Box>
   )
 }
 

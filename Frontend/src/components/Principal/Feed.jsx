@@ -1,11 +1,11 @@
 import React from 'react'
-import { Stack, Button, TextField } from '@mui/material'
+import { Stack, Button, Box } from '@mui/material'
 
 const Feed = () => {
   return (
-    <div>
-      salut Feed
-    </div>
+    <Box sx={{backgroundColor:'beige'}} flex={8} p={2}>
+      Feed
+    </Box>
   )
 }
 

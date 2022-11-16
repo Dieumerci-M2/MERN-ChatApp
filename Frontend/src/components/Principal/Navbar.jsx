@@ -1,11 +1,11 @@
 import React from 'react'
-import { Stack, Button, TextField, Container } from '@mui/material'
+import { Stack, Button, Box, Container } from '@mui/material'
 
 const Navbar = () => {
   return (
-    <Container>
-        <Button variant='contained' color='secondary' startIcon={<AccessAlarm/>}> Allarm</Button>
-    </Container>
+    <Box sx={{backgroundColor:'gold'}} p={2}>
+        Navbar
+    </Box>
           
   )
 }
