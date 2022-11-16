@@ -1,5 +1,5 @@
 import React from 'react'
-import { Stack, Button, Box } from '@mui/material'
+import { Box } from '@mui/material'
 
 const Sidebar = () => {
   return (
