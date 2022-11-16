@@ -1,11 +1,11 @@
 import React from 'react'
-import { Stack, Button, TextField } from '@mui/material'
+import { Stack , Box} from '@mui/material'
 
 const GroupChat = () => {
   return (
-      <Stack>
+      <Box>
           
-    </Stack>
+    </Box>
   )
 }
 
