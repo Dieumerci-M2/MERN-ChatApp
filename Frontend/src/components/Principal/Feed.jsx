@@ -1,12 +1,12 @@
 import React from 'react'
 import { Stack, Button, TextField } from '@mui/material'
 
-const Body = () => {
+const Feed = () => {
   return (
-    <Stack sx={{}}>
-          
-    </Stack>
+    <div>
+      salut Feed
+    </div>
   )
 }
 
-export default Body
+export default Feed
