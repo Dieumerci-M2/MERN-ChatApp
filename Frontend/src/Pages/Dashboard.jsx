@@ -1,7 +1,7 @@
 import React from 'react'
-import Sidebar from '../components/Principal/Sidebar';
-import Feed from '../components/Principal/Feed';
-import Navbar from '../components/Principal/Navbar';
+import Sidebar from '../components/Sidebar';
+import Feed from '../components/Feed';
+import Navbar from '../components/Navbar';
 import { Stack, Box } from '@mui/material'
 import { AccessAlarm, CloudDone, ThreeDRotation } from '@mui/icons-material';
 
