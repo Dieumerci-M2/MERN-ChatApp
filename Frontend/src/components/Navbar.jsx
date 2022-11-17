@@ -7,6 +7,7 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import Badge from '@mui/material/Badge';
+import Avatar from '@mui/material/Avatar';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -14,7 +15,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import MoreIcon from '@mui/icons-material/MoreVert';
+
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -63,7 +64,7 @@ export default function Navbar() {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const handleProfileMenuOpen = (event) => {
+  const handleOpenUserMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -76,9 +77,7 @@ export default function Navbar() {
     handleMobileMenuClose();
   };
 
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
+  
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -97,8 +96,9 @@ export default function Navbar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose}>Instant Chats</MenuItem>
+      <MenuItem onClick={ handleMenuClose }>My account</MenuItem>
+      <MenuItem onClick={ handleMenuClose }>Logout</MenuItem>
     </Menu>
   );
 
@@ -139,7 +139,7 @@ export default function Navbar() {
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
+      <MenuItem onClick={''}>
         <IconButton
           size="large"
           aria-label="account of current user"
@@ -153,6 +153,35 @@ export default function Navbar() {
       </MenuItem>
     </Menu>
   );
+
+  const StyledBadge = styled(Badge)(({ theme }) => ({
+    '& .MuiBadge-badge': {
+    backgroundColor: '#44b700',
+    color: '#44b700',
+    boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
+    '&::after': {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    borderRadius: '50%',
+    animation: 'ripple 1.2s infinite ease-in-out',
+    border: '1px solid currentColor',
+    content: '""',
+    },
+    },
+    '@keyframes ripple': {
+    '0%': {
+    transform: 'scale(.8)',
+    opacity: 1,
+    },
+    '100%': {
+    transform: 'scale(2.4)',
+    opacity: 0,
+    },
+    },
+    }));
 
   return (
     <Box sx={{ flexGrow: 1, color:'#37474f'}}>
@@ -200,28 +229,14 @@ export default function Navbar() {
                 <NotificationsIcon />
               </Badge>
             </IconButton>
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-          </Box>
-          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size="large"
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
+           <IconButton onClick={ handleOpenUserMenu } sx={ { p: 0 } }>
+                <StyledBadge
+                  overlap="circular"
+                  anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+                  variant="dot"
+                >
+                  <Avatar alt="Remy Sharp" src="../src/assets/a.jpg" />
+                </StyledBadge>
             </IconButton>
           </Box>
         </Toolbar>
