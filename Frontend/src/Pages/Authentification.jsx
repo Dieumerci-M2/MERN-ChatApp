@@ -87,7 +87,7 @@ const Authentification = () => {
       const data  = await (fetch( 'http://localhost:6600/api/user', {
         method: 'POST',
         ...config,
-        body: new URLSearchParams( { nom : SignName, email : SignEmail, password : SignPassword, picture : pic })
+        body: new URLSearchParams( { nom : SignName, email : SignEmail, password : SignPassword})
       } ).then(data => data.json()))
       
       toast.success( 'registration successful', toastOptions )
@@ -135,20 +135,20 @@ const Authentification = () => {
   }
   return (
     <Container maxWidth="sm">
-      <Stack spacing={ 2 } mt={ 15 } sx={ { backgroundColor: 'white', borderRadius: '10px', } }>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <Tabs value={value} onChange={changeTabs} aria-label="basic tabs example">
-            <Tab label="Login" />
-            <Tab label="Sign-Up" />
+      <Stack spacing={ 2 } mt={ 15 } sx={ { backgroundColor: 'initial', borderRadius: '10px', border:'1px solid #cfd8dc' } }>
+        <Box sx={{ borderBottom: 1, borderColor: '#cfd8dc' }}>
+          <Tabs value={value} onChange={changeTabs} aria-label="basic tabs example" >
+            <Tab label="Login" sx={ {color:'white'}} />
+            <Tab label="Sign-Up" sx={ {color:'white'}} />
           </Tabs>
         </Box>
-        <Box sx={{ padding: 2 }}>
+        <Box sx={{ padding: 2 , color:'white'}}>
           {value === 0 && (
           <Stack spacing={ 2 }>
-            <TextField label='Email' variant='outlined' size='small' type='mail' required={true} onChange={(e)=> setLogEmail(e.target.value)}></TextField>
-              <TextField label='Password' variant='outlined' size='small' type={hiden ? 'password': ''} required={ true } onChange={ ( e ) => setLogPassword(e.target.value)} InputProps={{endAdornment: <InputAdornment position='end'><Button variant='text' onClick={handlePassword} endIcon={hiden ? <VisibilityOffIcon/> : <VisibilityIcon/>}></Button></InputAdornment>}}></TextField>
+            <TextField label='Email' variant='outlined' size='small' type='mail' required={true} onChange={(e)=> setLogEmail(e.target.value)} sx={{color:'white', border:'1px solid white', borderRadius:'5px'}}></TextField>
+            <TextField label='Password' variant='outlined' size='small' type={hiden ? 'password': ''} sx={{color:'white', border:'1px solid white', borderRadius:'5px'}} required={ true } onChange={ ( e ) => setLogPassword(e.target.value)} InputProps={{endAdornment: <InputAdornment position='end'><Button  onClick={handlePassword} endIcon={hiden ? <VisibilityOffIcon/> : <VisibilityIcon/>}></Button></InputAdornment>}}></TextField>
             <Button variant='contained' onClick={ConnectHandler}>Connexion</Button>
-            <Button variant='text' >forgoted password</Button>
+            <Button variant='text' sx={{color:'white'}} >forgoted password</Button>
           </Stack>
           )}
           {value === 1 && (

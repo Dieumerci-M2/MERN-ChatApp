@@ -1,5 +1,5 @@
 body{
-    /* background-image: url('./assets/sunset.jpg');
-    background-size: cover;  
-    z-index: -1; */
+    background-color: #263238; 
+    background-size: cover;
+    color : 'white'  
 }

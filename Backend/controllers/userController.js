@@ -5,12 +5,12 @@ const bcrypt=require("bcrypt")
 
 const registerUser = async(req, res) => {
     const { nom, email, password, picture } = req.body
-    console.log(req.body)
+    console.log(nom)
 
     if ( !nom || !email || !password ) {
 
-        res.status( 400 )
-        throw new Error('Please complete all the field')
+        return res.status( 400 ).send( { message: 'Please complete all the field' } )
+        
     } 
     
     const existUser = await User.findOne( { email } )
@@ -49,7 +49,7 @@ const authUser =  async (req, res,next) => {
     const { email, password } = req.body
     const user = await User.findOne( { email } )
         if (!user) {
-              return res.json( {
+              return res.status(404).json( {
                   message: "pas d'utilisateur a cet email",
                   statut:false
         }) 
