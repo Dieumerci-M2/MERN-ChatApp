@@ -77,8 +77,17 @@ export default function Navbar() {
     handleMobileMenuClose();
   };
 
-  
+  const handleMenuChats = () => {
+    console.log('chats')
+  }
 
+  const handleMenuAccount = () => {
+    console.log('account');
+  }
+
+  const handleMenuLogout = () => {
+    console.log('Logout');
+  }
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -96,11 +105,15 @@ export default function Navbar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Instant Chats</MenuItem>
-      <MenuItem onClick={ handleMenuClose }>My account</MenuItem>
-      <MenuItem onClick={ handleMenuClose }>Logout</MenuItem>
+      <MenuItem onClick={handleMenuChats}>Instant Chats</MenuItem>
+      <MenuItem onClick={ handleMenuAccount}>My account</MenuItem>
+      <MenuItem onClick={ handleMenuLogout }>Logout</MenuItem>
     </Menu>
   );
+
+  const handlerNotifications = () => {
+    console.log('Notifications');
+  }
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
@@ -139,7 +152,7 @@ export default function Navbar() {
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
-      <MenuItem onClick={''}>
+      <MenuItem onClick={ handlerNotifications }>
         <IconButton
           size="large"
           aria-label="account of current user"
@@ -194,7 +207,7 @@ export default function Navbar() {
             aria-label="open drawer"
             sx={{ mr: 2 }}
           >
-            <MenuIcon />
+          <MenuIcon sx={ { display: { xs: 'block', sm: 'none' } } } />
           </IconButton>
           <Typography
             variant="h6"
@@ -214,7 +227,7 @@ export default function Navbar() {
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
               <Badge badgeContent={4} color="error">
                 <MailIcon />
