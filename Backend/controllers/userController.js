@@ -68,4 +68,30 @@ const authUser =  async (req, res,next) => {
     }
 }
 
-module.exports = { registerUser, authUser };
+const   SomeUsers = async( req, res ) => {
+    
+    const keyword = req.query.search
+        ? {
+
+        $or: [
+            { nom: { $regex: req.query.search, $options: 'i' } },
+            { email: { $regex: req.query.search, $options: 'i' } }
+        ],
+
+    } : {
+        
+    };
+
+    const users = await User.find( keyword )
+    res.send( users )
+   
+    
+}
+
+// const Allusers = async ( req, res ) => {
+//     const users = await User.find()
+//     res.send( users )
+   
+// }
+
+module.exports = { registerUser, authUser,  SomeUsers };

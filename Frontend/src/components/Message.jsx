@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Tooltip from '@mui/material/Tooltip';
-import Fab from '@mui/material/Fab';
+import { Fab } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { styled } from '@mui/material/styles';
 
@@ -28,7 +28,7 @@ const Message = () => {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-        <Box width={400} heigth={280} bgcolor='white' p={3} borderRadius={5}>
+        <Box width={400} heigth={10} bgcolor='white' p={3} borderRadius={5}>
 
         </Box>  
       </StyleModal>
