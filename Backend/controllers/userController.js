@@ -82,16 +82,10 @@ const   SomeUsers = async( req, res ) => {
         
     };
 
-    const users = await User.find( keyword )
+    const users = await User.find( keyword)
     res.send( users )
    
     
 }
-
-// const Allusers = async ( req, res ) => {
-//     const users = await User.find()
-//     res.send( users )
-   
-// }
 
 module.exports = { registerUser, authUser,  SomeUsers };
