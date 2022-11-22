@@ -50,8 +50,13 @@ const chatEnter = async( req, res ) => {
 }
 
 
-// const chatOut = ( req, res, next ) => {
-    
-// }
+const chatOut = ( req, res ) => {
+    try {
+        Chat.find( { users: { $elemMatch: { $eq: req.user._id } } } )
+            .then( data => res.send(data) )
+    } catch (error) {
+        
+    }
+}
 
-module.exports = {chatEnter}
+module.exports = {chatEnter, chatOut}
