@@ -26,6 +26,6 @@ const ModelChats = mongoose.Schema(
     }
 )
 
-const chat = mongoose.Models( 'Chat', ModelChats )
+const chat = mongoose.model( 'Chat', ModelChats )
 
 module.exports = chat;
