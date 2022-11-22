@@ -4,7 +4,7 @@ const app = express()
 const ConnectionDB = require('./config/db')
 const colors = require( 'colors' )
 const userRoute = require( './Routes/UserRoute' )
-const notFound = require('./middlewares/errorMiddleware')
+// const notFound = require('./middlewares/errorMiddleware')
 const Port = process.env.Port || 6600
 
 dotenv.config()
@@ -31,7 +31,7 @@ app.options(/.*/,( req, res ) => {
 })
 app.use( '/api/user', userRoute )
 
-app.use( notFound )
+// app.use( notFound )
 
 
 
