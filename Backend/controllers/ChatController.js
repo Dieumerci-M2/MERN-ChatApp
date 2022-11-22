@@ -13,7 +13,7 @@ const chatEnter = async( req, res ) => {
   let isChat = await Chat.find({
     isGroupChat: false,
     $and: [
-      { users: { $elemMatch: { $eq: req.user._id } } },
+      { users: { $elemMatch: { $eq: req.params._id } } },
       { users: { $elemMatch: { $eq: userId } } },
     ],
   })
@@ -31,7 +31,7 @@ const chatEnter = async( req, res ) => {
     let chatData = {
       chatName: "sender",
       isGroupChat: false,
-      users: [req.user._id, userId],
+      users: [req.params._id, userId],
     };
 
     try {
@@ -52,11 +52,21 @@ const chatEnter = async( req, res ) => {
 
 const chatOut = ( req, res ) => {
     try {
-        Chat.find( { users: { $elemMatch: { $eq: req.user._id } } } )
-            .then( data => res.send(data) )
-    } catch (error) {
-        
-    }
+        Chat.find( { users: { $elemMatch: { $eq: req.params._id } } } )
+            .populate('users', '-password') 
+            .populate('groupAdmin', '-password')
+            .populate( 'latestMessage' )
+            .sort( { updateAt: -1 } )
+            .then( async( result ) => {
+                result = await User.populate( result, {
+                    path: "latestMessage.sender",
+                    select: "nom picture email",    
+                } )
+                res.status(200).send(result)
+            })   
+            } catch (error) {
+                throw new Error(error)
+            }
 }
 
 module.exports = {chatEnter, chatOut}
