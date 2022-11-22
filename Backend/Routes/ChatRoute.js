@@ -4,7 +4,7 @@ const protecte = require('../middlewares/AuthMiddleware')
 const { route } = require( './UserRoute' )
 const {chatEnter} = require('../controllers/ChatController')
 
-router.post( '/', protecte,chatEnter )
+router.post( '/',protecte, chatEnter )
 // router.get( '/', protecte, chatOut )
 // router.post( '/group', protecte, createGroup )
 // router.put( '/grouprename', protecte, remanegroup )
