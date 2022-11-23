@@ -7,6 +7,8 @@ import Navbar from '../components/Navbar'
 import { Box, createTheme, Stack } from '@mui/material'
 import AddPost from '../components/AddPost'
 import { ThemeProvider } from '@emotion/react';
+import { useEffect } from "react";
+import { useHistory } from "react-router";
 
 
 const Dashboard = () => {
