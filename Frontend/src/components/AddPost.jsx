@@ -76,7 +76,6 @@ const AddPost = () => {
             <Button sx={{width:'100px'}}><DateRangeIcon/></Button>
           </ButtonGroup>
         </Box> 
-        
       </StyleModal>
     </>
   )
