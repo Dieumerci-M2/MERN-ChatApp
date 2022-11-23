@@ -1,10 +1,5 @@
 import { Box, Typography, Avatar, AvatarGroup, ImageList, ImageListItem } from '@mui/material'
 import React from 'react'
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import Divider from '@mui/material/Divider';
 import Post from './Post';
 
 const Rightbar = () => {
@@ -14,8 +9,8 @@ const Rightbar = () => {
         <Box mt={1} sx={{borderButtom:'1px solid black'}}>
           <Typography fontWeight={ 200 }>Online Friends</Typography>
         </Box>
-        <Box mt={1}>
-          <AvatarGroup max={4}>
+        <Box mt={1} p={1}>
+          <AvatarGroup max={6}>
           <Avatar alt="Remy Sharp" src="../src/assets/b.jpg" />
           <Avatar alt="Travis Howard" src="../src/assets/c.jpg" />
           <Avatar alt="Cindy Baker" src="../src/assets/d.jpg" />

@@ -29,6 +29,7 @@ const ListChat =  ()=> {
               {" — I'll be in your neighborhood doing errands this…"}
             </React.Fragment>
           }
+        sx={{cursor:'pointer'}}
         />
       </ListItem>
       <Divider variant="inset" component="li" />
@@ -51,6 +52,7 @@ const ListChat =  ()=> {
               {" — Wish I could come, but I'm out of town this…"}
             </React.Fragment>
           }
+            sx={{cursor:'pointer'}}
         />
       </ListItem>
       <Divider variant="inset" component="li" />
@@ -73,6 +75,7 @@ const ListChat =  ()=> {
               {' — Do you have Paris recommendations? Have you ever…'}
             </React.Fragment>
           }
+            sx={{cursor:'pointer'}}
         />
       </ListItem>
     </List>
