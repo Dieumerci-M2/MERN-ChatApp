@@ -5,13 +5,13 @@ const ModelChats = mongoose.Schema(
     {
         chatName: { type: String, trim: true },
         isGroupChat: { type: Boolean, default: false },
-        userChat: [
+        users: [
             {
                 type: mongoose.Schema.Types.ObjectId,
                 ref : 'User'
             }
         ],
-        latestMessages: {
+        latestMessage: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Message'
         },
@@ -26,6 +26,6 @@ const ModelChats = mongoose.Schema(
     }
 )
 
-const chat = mongoose.Models( 'Chat', ModelChats )
+const chat = mongoose.model( 'Chat', ModelChats )
 
 module.exports = chat;

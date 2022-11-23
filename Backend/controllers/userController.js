@@ -42,28 +42,36 @@ const registerUser = async(req, res) => {
     
 } 
 
-const authUser =  async (req, res,next) => {
+const authUser = async ( req, res, next ) => {
     
 
     try {
-    const { email, password } = req.body
-    const user = await User.findOne( { email } )
-        if (!user) {
-              return res.status(404).json( {
-                  message: "pas d'utilisateur a cet email",
-                  statut:false
-        }) 
+        const { email, password } = req.body
+        const user = await User.findOne( { email } )
+        if ( !user ) {
+            return res.status( 404 ).json( {
+                message: "pas d'utilisateur a cet email",
+                statut: false
+            } )
         }
         const isOk = await bcrypt.compare( password, user.password )
-        if (!isOk) {
+        if ( !isOk ) {
             return res.json( {
                 message: "mot de passe incorrect",
-                statut:false
-            })
+                statut: false
+            } )
         }
-        delete user.password
-        res.json({message:"bien enregistre",user})
-    } catch(ex) {
+        if ( user && isOk ) {
+            res.json( {
+                _id: user._id,
+                nom: user.nom,
+                email: user.email,
+                picture: user.picture,
+                token: generateToken( user._id ),
+            } );
+        }
+
+    } catch ( ex ) {
         next(ex)
     }
 }
@@ -83,9 +91,7 @@ const   SomeUsers = async( req, res ) => {
     };
 
     const users = await User.find( keyword)
-    res.send( users )
-   
-    
+    res.send( users )  
 }
 
 module.exports = { registerUser, authUser,  SomeUsers };

@@ -9,9 +9,10 @@ const MessageModel = mongoose.Schema( {
     chat: {
         type: mongoose.Schema.Types.ObjectId,
         ref : 'Chat'
-    }
+    },
+    readBy: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
 } )
 
-const message = mongoose.Model( 'Message', MessageModel )
+const message = mongoose.model( 'Message', MessageModel )
 
 module.exports = message
