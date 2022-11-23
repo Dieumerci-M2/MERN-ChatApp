@@ -14,9 +14,17 @@ const StyleModal = styled( Modal )( {
   justifyContent:'center'
 })
 const Message = () => {
+  const [ Open, setOpen ] = useState( true )
+  
+  const handleOpen = () => {
+    setOpen(false)
+  }
+  const handleClose = () => {
+    setOpen(true)
+  }
   return (
     <>
-        <Tooltip onClick={handleOpen} title="Add" sx={{position:'fixed', bottom:20, left:{xs:'calc(50% - 25px)', md:10}}}>
+        {/* <Tooltip onClick={handleOpen} title="Add" sx={{position:'fixed', bottom:20, left:{xs:'calc(50% - 25px)', md:10}}}>
           <Fab color="primary" aria-label="add">
             <AddIcon />
           </Fab>
@@ -31,7 +39,7 @@ const Message = () => {
         <Box width={400} heigth={10} bgcolor='white' p={3} borderRadius={5}>
 
         </Box>  
-      </StyleModal>
+      </StyleModal> */}
     </>
   )
 }

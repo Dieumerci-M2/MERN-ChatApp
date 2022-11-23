@@ -17,7 +17,7 @@ import Brightness4Icon from '@mui/icons-material/Brightness4';
 const Sidebar = ({mode, setMode}) => {
 
   return (
-    <Box sx={ { display: { xs: 'none', sm: 'block' } } } flex={ 2 } p={ 2 } >
+    <Box sx={ { display: { xs: 'none', sm: 'block' } ,borderRight:'1px solid #babdbe'} } flex={ 2 } p={ 2 } >
       <Box position='fixed'>
       <List>
         <ListItem disablePadding>
