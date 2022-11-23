@@ -41,7 +41,7 @@ const AddPost = () => {
             <AddIcon />
           </Fab>
        </Tooltip>
-       <Button onClick={handleOpen}>Open modal</Button>
+       
         <StyleModal styleModal
           open={open}
           onClose={handleClose}
