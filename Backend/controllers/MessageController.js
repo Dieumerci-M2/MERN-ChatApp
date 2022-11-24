@@ -10,9 +10,9 @@ const sendMessage = async ( req, res ) => {
         return res.status( 400 ).send( { message: 'Please complete all the field' } )
         
      }
-    
+    console.log(req.user);
     let newMessage = {
-        sender: req.params._id, 
+        sender: req.user._id || '', 
         content: content,
         chat: chatId
     }
@@ -20,16 +20,14 @@ const sendMessage = async ( req, res ) => {
     try {
         let message = await Message.create( newMessage )
         
-        message = await message.populate( 'sender', 'nom picture' )
+        message = await message.populate( 'sender', {nom:1, picture:1} )
         message = await message.populate( 'chat' )
         message = await User.populate( message, {
             path: 'chat.users',
             select: 'nom email picture'
         })
         
-        await Chat.findByIdAndUpdate( req.body.chatId, {
-            latestMessage : message
-        } )
+        await Chat.findByIdAndUpdate(req.body.chatId, { latestMessage: message });
         
         res.json(message)
 

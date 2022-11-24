@@ -52,17 +52,17 @@ const chatEnter = async( req, res ) => {
 
 const chatOut = ( req, res ) => {
     try {
-        Chat.find( { users: { $elemMatch: { $eq: req.params._id } } } )
-            .populate('users', '-password') 
-            .populate('groupAdmin', '-password')
-            .populate( 'latestMessage' )
-            .sort( { updateAt: -1 } )
-            .then( async( result ) => {
-                result = await User.populate( result, {
-                    path: "latestMessage.sender",
-                    select: "nom picture email",    
-                } )
-                res.status(200).send(result)
+         Chat.find({ users: { $elemMatch: { $eq: req.user._id } } })
+            .populate("users", "-password")
+            .populate("groupAdmin", "-password")
+            .populate("latestMessage")
+            .sort({ updatedAt: -1 })
+            .then(async (results) => {
+              results = await User.populate(results, {
+                path: "latestMessage.sender",
+                select: "name pic email",
+             });
+                res.status(200).send(results)
             })   
             } catch (error) {
                 throw new Error(error)
