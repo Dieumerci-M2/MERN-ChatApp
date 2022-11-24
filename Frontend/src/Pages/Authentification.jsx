@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
@@ -51,7 +51,7 @@ const Authentification = () => {
       const { data } = await axios.post( "http://localhost:6600/api/user/login", { email: LogEmail, password: LogPassword }, config )
       
        toast.success( 'registration successful', toastOptions )
-      
+      console.log(data);
       localStorage.setItem( 'InfoUser', JSON.stringify(data))
       navigateTo( '/chats' )
       setUpload(false)
@@ -108,7 +108,7 @@ const Authentification = () => {
       return;
     }
 
-    if ( tof.type === 'image/pjeg' || tof.type === 'image/png' || tof.type === 'image/jpg') {
+    if ( tof.name === 'image/pjeg' || tof.name === 'image/png' || tof.name === 'image/jpg') {
       const data = new FormData()
       data.append( 'file', tof )
       data.append( 'upload_preset', 'chat-app' )
@@ -119,7 +119,7 @@ const Authentification = () => {
         body: data,
       } ).then( res => res.json() )
         .then( data => {
-          setPic( data)
+          setPic( data.url)
           setUpload(false)
         } )
         .catch( ( err ) => {

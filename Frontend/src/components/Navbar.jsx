@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React,{useContext, useState} from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -15,7 +15,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-
+import { Drawer, TextField, Button } from '@mui/material';
+import { ChatContext } from '../Context/Context';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -57,12 +58,26 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function Navbar() {
+ const Navbar = ()=> {
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+  const [ mobileMoreAnchorEl, setMobileMoreAnchorEl ] = React.useState( null );
+  const [search, setSearch] = useState("");
+  const [searchResult, setSearchResult] = useState([]);
+  const [loading, setLoading] = useState(false);
+   const [ loadingChat, setLoadingChat ] = useState( false );
+   const [ onClose, setOnclose ] = useState( false )
+    const [isOpen ,setIsOpen ]  = useState(false);
+
+   
+  const {user} = useContext(ChatContext)
 
   const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+   const isMobileMenuOpen = Boolean( mobileMoreAnchorEl );
+   
+   const handleSearch = async () => { 
+     
+   }
+    
 
   const handleOpenUserMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -194,9 +209,40 @@ export default function Navbar() {
     opacity: 0,
     },
     },
-    }));
+  } ) );
+   
+   const accessChat = async (userId) => {
+    console.log(userId);
 
-  return (
+    try {
+      setLoadingChat(true);
+      const config = {
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      };
+      const { data } = await axios.post(`/api/chat`, { userId }, config);
+
+      if (!chats.find((c) => c._id === data._id)) setChats([data, ...chats]);
+      setSelectedChat(data);
+      setLoadingChat(false);
+      onClose();
+    } catch (error) {
+      toast({
+        title: "Error fetching the chat",
+        description: error.message,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom-left",
+      });
+    }
+  };
+
+
+   return (
+    <>
     <Box sx={{ flexGrow: 1, color:'#37474f'}}>
       <AppBar position="static" sx={{backgroundColor:'#37474f'}}>
         <Toolbar>
@@ -248,7 +294,7 @@ export default function Navbar() {
                   anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
                   variant="dot"
                 >
-                  <Avatar alt="Remy Sharp" src="../src/assets/a.jpg" />
+                  <Avatar alt={user.nom} src={user.picture} />
                 </StyledBadge>
             </IconButton>
           </Box>
@@ -257,5 +303,35 @@ export default function Navbar() {
       {renderMobileMenu}
       {renderMenu}
     </Box>
+    {/* <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
+
+          
+            <Box d="flex" pb={2}>
+              <TextField
+                placeholder="Search by name or email"
+                mr={2}
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+              <Button onClick={handleSearch}>Go</Button>
+            </Box>
+            {loading ? (
+              <ChatLoading />
+            ) : (
+              searchResult?.map((user) => (
+                <UserListItem
+                  key={user._id}
+                  user={user}
+                  handleFunction={() => accessChat(user._id)}
+                />
+              ))
+            )}
+            {loadingChat && <Spinner ml="auto" d="flex" />}
+          
+       
+      </Drawer> */}
+    </>
   );
 }
+
+export default Navbar

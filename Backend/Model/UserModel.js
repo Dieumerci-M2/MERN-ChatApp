@@ -13,7 +13,7 @@ const UserModel = mongoose.Schema( {
     password: { type: String, required: true },
     picture: {
         type: String,
-        default : '../assets/chatApp.svg'
+        default : 'https://res.cloudinary.com/md-chatapp-mern/image/upload/v1668690954/ti1nbpcrxaevqp9fjiks.jpg'
     }
 },
 {

@@ -12,7 +12,7 @@ const ListChat =  ()=> {
     <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
       <ListItem alignItems="flex-start">
         <ListItemAvatar>
-          <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+          <Avatar alt="Remy Sharp" src="../assets/e.jpg" />
         </ListItemAvatar>
         <ListItemText
           primary="Brunch this weekend?"
@@ -35,7 +35,7 @@ const ListChat =  ()=> {
       <Divider variant="inset" component="li" />
       <ListItem alignItems="flex-start">
         <ListItemAvatar>
-          <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
+          <Avatar alt="Travis Howard" src="../assets/c.jpg" />
         </ListItemAvatar>
         <ListItemText
           primary="Summer BBQ"
@@ -58,7 +58,7 @@ const ListChat =  ()=> {
       <Divider variant="inset" component="li" />
       <ListItem alignItems="flex-start">
         <ListItemAvatar>
-          <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
+          <Avatar alt="Cindy Baker" src="../assets/d.jpg" />
         </ListItemAvatar>
         <ListItemText
           primary="Oui Oui"

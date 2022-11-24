@@ -4,7 +4,9 @@ const app = express()
 const ConnectionDB = require('./config/db')
 const colors = require( 'colors' )
 const userRoute = require( './Routes/UserRoute' )
-const chatRoute = require('./Routes/ChatRoute')
+const chatRoute = require( './Routes/ChatRoute' )
+const messageRoute = require( './Routes/MessageRoute' )
+
 // const notFound = require('./middlewares/errorMiddleware')
 const Port = process.env.Port || 6600
 
@@ -31,7 +33,8 @@ app.options(/.*/,( req, res ) => {
     res.end();
 })
 app.use( '/api/user', userRoute )
-app.use('/api/chat', chatRoute)
+app.use( '/api/chat', chatRoute )
+app.use('/api/message', messageRoute)
 
 //app.use( notFound )
 
