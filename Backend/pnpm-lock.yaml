@@ -2,25 +2,33 @@ lockfileVersion: 5.4
 
 specifiers:
   bcrypt: ^5.1.0
+  bufferutil: ^4.0.7
   colors: ^1.4.0
   dotenv: ^16.0.3
+  eiows: ^4.1.2
   express: ^4.18.2
   express-async-handler: ^1.2.0
   mongoose: ^6.7.1
   morgan: ^1.10.0
   nodemon: ^2.0.20
   socket.io: ^4.5.3
+  utf-8-validate: ^5.0.10
 
 dependencies:
   bcrypt: 5.1.0
   colors: 1.4.0
   dotenv: 16.0.3
+  eiows: 4.1.2
   express: 4.18.2
   express-async-handler: 1.2.0
   mongoose: 6.7.1
   morgan: 1.10.0
   nodemon: 2.0.20
-  socket.io: 4.5.3
+  socket.io: 4.5.3_3cxu5zja4e2r5wmvge7mdcljwq
+
+optionalDependencies:
+  bufferutil: 4.0.7
+  utf-8-validate: 5.0.10
 
 packages:
 
@@ -975,6 +983,14 @@ packages:
       ieee754: 1.2.1
     dev: false
 
+  /bufferutil/4.0.7:
+    resolution: {integrity: sha512-kukuqc39WOHtdxtw4UScxF/WVnMFVSQVKhtx3AjZJzhd0RGZZldcrfSEbVsWWe6KNH253574cq5F+wpv0G9pJw==}
+    engines: {node: '>=6.14.2'}
+    requiresBuild: true
+    dependencies:
+      node-gyp-build: 4.5.0
+    dev: false
+
   /bytes/3.1.2:
     resolution: {integrity: sha512-/Nf7TyzTx6S3yRJObOAV7956r8cr2+Oj8AC5dt8wSP3BQAoeX58NoHyCU8P8zGkNXStjTSi6fzO6F0pBdcYbEg==}
     engines: {node: '>= 0.8'}
@@ -1127,6 +1143,12 @@ packages:
     resolution: {integrity: sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==}
     dev: false
 
+  /eiows/4.1.2:
+    resolution: {integrity: sha512-dNu+yOdp/mPROgEIW9pFnx+iBLob130BPqspXxSt63OvICtitrpYQSmdJ2M7irIwqh3oj1JfDKadHPCocKPBpg==}
+    engines: {node: '>=14.13.0 <19.0'}
+    requiresBuild: true
+    dev: false
+
   /emoji-regex/8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
     dev: false
@@ -1141,7 +1163,7 @@ packages:
     engines: {node: '>=10.0.0'}
     dev: false
 
-  /engine.io/6.2.1:
+  /engine.io/6.2.1_3cxu5zja4e2r5wmvge7mdcljwq:
     resolution: {integrity: sha512-ECceEFcAaNRybd3lsGQKas3ZlMVjN3cyWwMP25D2i0zWfyiytVbTpRPa34qrr+FHddtpBVOmq4H/DCv1O0lZRA==}
     engines: {node: '>=10.0.0'}
     dependencies:
@@ -1154,7 +1176,7 @@ packages:
       cors: 2.8.5
       debug: 4.3.4
       engine.io-parser: 5.0.4
-      ws: 8.2.3
+      ws: 8.2.3_3cxu5zja4e2r5wmvge7mdcljwq
     transitivePeerDependencies:
       - bufferutil
       - supports-color
@@ -1603,6 +1625,11 @@ packages:
       whatwg-url: 5.0.0
     dev: false
 
+  /node-gyp-build/4.5.0:
+    resolution: {integrity: sha512-2iGbaQBV+ITgCz76ZEjmhUKAKVf7xfY1sRl4UiKQspfZMH2h06SyhNsnSVy50cwkFQDGLyif6m/6uFXHkOZ6rg==}
+    hasBin: true
+    dev: false
+
   /nodemon/2.0.20:
     resolution: {integrity: sha512-Km2mWHKKY5GzRg6i1j5OxOHQtuvVsgskLfigG25yTtbyfRGn/GNvIbRyOf1PSCKJ2aT/58TiuUsuOU5UToVViw==}
     engines: {node: '>=8.10.0'}
@@ -1891,14 +1918,14 @@ packages:
       - supports-color
     dev: false
 
-  /socket.io/4.5.3:
+  /socket.io/4.5.3_3cxu5zja4e2r5wmvge7mdcljwq:
     resolution: {integrity: sha512-zdpnnKU+H6mOp7nYRXH4GNv1ux6HL6+lHL8g7Ds7Lj8CkdK1jJK/dlwsKDculbyOHifcJ0Pr/yeXnZQ5GeFrcg==}
     engines: {node: '>=10.0.0'}
     dependencies:
       accepts: 1.3.8
       base64id: 2.0.0
       debug: 4.3.4
-      engine.io: 6.2.1
+      engine.io: 6.2.1_3cxu5zja4e2r5wmvge7mdcljwq
       socket.io-adapter: 2.4.0
       socket.io-parser: 4.2.1
     transitivePeerDependencies:
@@ -2030,6 +2057,14 @@ packages:
     engines: {node: '>= 0.8'}
     dev: false
 
+  /utf-8-validate/5.0.10:
+    resolution: {integrity: sha512-Z6czzLq4u8fPOyx7TU6X3dvUZVvoJmxSQ+IcrlmagKhilxlhZgxPK6C5Jqbkw1IDUmFTM+cz9QDnnLTwDz/2gQ==}
+    engines: {node: '>=6.14.2'}
+    requiresBuild: true
+    dependencies:
+      node-gyp-build: 4.5.0
+    dev: false
+
   /util-deprecate/1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
     dev: false
@@ -2084,7 +2119,7 @@ packages:
     resolution: {integrity: sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==}
     dev: false
 
-  /ws/8.2.3:
+  /ws/8.2.3_3cxu5zja4e2r5wmvge7mdcljwq:
     resolution: {integrity: sha512-wBuoj1BDpC6ZQ1B7DWQBYVLphPWkm8i9Y0/3YdHjHKHiohOJ1ws+3OccDWtH+PoC9DZD5WOTrJvNbWvjS6JWaA==}
     engines: {node: '>=10.0.0'}
     peerDependencies:
@@ -2095,6 +2130,9 @@ packages:
         optional: true
       utf-8-validate:
         optional: true
+    dependencies:
+      bufferutil: 4.0.7
+      utf-8-validate: 5.0.10
     dev: false
 
   /yallist/4.0.0:
