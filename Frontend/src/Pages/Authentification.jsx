@@ -108,7 +108,7 @@ const Authentification = () => {
       return;
     }
 
-    if ( tof.type === 'image/pjeg' || tof.type === 'image/png' || tof.type === 'image/jpg') {
+    if ( tof.name === 'image/pjeg' || tof.name === 'image/png' || tof.name === 'image/jpg') {
       const data = new FormData()
       data.append( 'file', tof )
       data.append( 'upload_preset', 'chat-app' )

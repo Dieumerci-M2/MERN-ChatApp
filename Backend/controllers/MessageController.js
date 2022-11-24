@@ -39,7 +39,18 @@ const sendMessage = async ( req, res ) => {
 
 const ViewMessages = async ( req, res ) => {
     
-
+    try {
+      console.log(req.params.chatId);
+      let message = await Message.find( { chat: req.params.chatId } )
+          .populate( 'sender', { nom:1, email:1, picture:1} )
+        .populate( 'chat' )
+        
+      res.json( message )
+      
+  } catch (error) {
+      res.status( 400 )
+      throw new Error(error.message)
+  }
 
 }
 

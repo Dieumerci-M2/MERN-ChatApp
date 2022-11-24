@@ -5,6 +5,6 @@ const protecte = require('../middlewares/AuthMiddleware')
 const {sendMessage, ViewMessages} = require('../controllers/MessageController')
 
 router.post( '/', protecte, sendMessage )
-router.get(':chatId', protecte, ViewMessages)
+router.get('/:chatId', protecte, ViewMessages)
 
 module.exports = router;
