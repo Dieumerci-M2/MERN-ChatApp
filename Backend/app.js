@@ -7,7 +7,8 @@ const userRoute = require( './Routes/UserRoute' )
 const chatRoute = require( './Routes/ChatRoute' )
 const messageRoute = require( './Routes/MessageRoute' )
 
-// const notFound = require('./middlewares/errorMiddleware')
+const notFound = require( './middlewares/errorMiddleware' )
+
 const Port = process.env.Port || 6600
 
 dotenv.config()
@@ -36,8 +37,19 @@ app.use( '/api/user', userRoute )
 app.use( '/api/chat', chatRoute )
 app.use('/api/message', messageRoute)
 
-//app.use( notFound )
+app.use( notFound )
 
 
 
-app.listen(Port, ()=>console.log(`server is running to port http://localhost:${Port}`.yellow.bold))
+const server = app.listen( Port, () => console.log( `server is running to port http://localhost:${ Port }`.yellow.bold ) )
+
+const io = require( 'socket.io' )( server, {
+    setTimeout: 60000,
+    cors: {
+        origin: 'http://localhost:3000'
+    }
+})
+
+io.on( 'connexion', (socket) => {
+    console.log('Socke.io connected');
+})
