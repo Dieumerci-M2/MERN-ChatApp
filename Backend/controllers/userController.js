@@ -5,7 +5,6 @@ const bcrypt=require("bcrypt")
 
 const registerUser = async(req, res) => {
     const { nom, email, password, picture } = req.body
-    console.log(nom)
 
     if ( !nom || !email || !password ) {
 

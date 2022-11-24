@@ -1,5 +1,5 @@
 
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import Feed from '../components/Feed'
 import Sidebar from '../components/Sidebar'
 import Rightbar from '../components/RightBar'
@@ -7,11 +7,10 @@ import Navbar from '../components/Navbar'
 import { Box, createTheme, Stack } from '@mui/material'
 import AddPost from '../components/AddPost'
 import { ThemeProvider } from '@emotion/react';
-import { useEffect } from "react";
-import { useHistory } from "react-router";
-
+import { useNavigate} from 'react-router-dom'
 
 const Dashboard = () => {
+
 
   const [ mode, setMode ] = useState( 'light' )
   
