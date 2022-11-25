@@ -17,6 +17,8 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { Drawer, TextField, Button } from '@mui/material';
 import { ChatContext } from '../Context/Context';
+//import ProfileInfo from './ProfileInfo'
+import { useNavigate} from 'react-router-dom'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -68,15 +70,20 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   const [ onClose, setOnclose ] = useState( false )
   const [isOpen ,setIsOpen ]  = useState(false);
 
-   
+  const navigate = useNavigate()
   const {user} = useContext(ChatContext)
 
   const isMenuOpen = Boolean(anchorEl);
    const isMobileMenuOpen = Boolean( mobileMoreAnchorEl );
    
    const handleSearch = async () => { 
-     
+     console.log('hanlesearch')
    }
+
+   const logout = () => {
+     localStorage.removeItem( 'infoUser' )
+     navigate('/')
+  }
     
 
   const handleOpenUserMenu = (event) => {
@@ -120,9 +127,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuChats}>Instant Chats</MenuItem>
       <MenuItem onClick={ handleMenuAccount}>My account</MenuItem>
-      <MenuItem onClick={ handleMenuLogout }>Logout</MenuItem>
+      <MenuItem onClick={ logout}>Logout</MenuItem>
     </Menu>
   );
 
