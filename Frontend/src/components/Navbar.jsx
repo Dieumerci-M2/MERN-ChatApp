@@ -64,9 +64,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   const [search, setSearch] = useState("");
   const [searchResult, setSearchResult] = useState([]);
   const [loading, setLoading] = useState(false);
-   const [ loadingChat, setLoadingChat ] = useState( false );
-   const [ onClose, setOnclose ] = useState( false )
-    const [isOpen ,setIsOpen ]  = useState(false);
+  const [ loadingChat, setLoadingChat ] = useState( false );
+  const [ onClose, setOnclose ] = useState( false )
+  const [isOpen ,setIsOpen ]  = useState(false);
 
    
   const {user} = useContext(ChatContext)
@@ -263,14 +263,16 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
           >
             ChapApp
           </Typography>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-            />
+            <Search>
+              <Button variant='ghost' sx={{display : 'flex', justifyContent:'space-between'}}>
+               <SearchIconWrapper>
+                  <SearchIcon />
+                </SearchIconWrapper>
+                <StyledInputBase
+                  placeholder="Search…"
+                  inputProps={{ 'aria-label': 'search' }}
+               />
+            </Button> 
           </Search>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
