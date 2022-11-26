@@ -15,10 +15,12 @@ import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { Drawer, TextField, Button } from '@mui/material';
+import {Button } from '@mui/material';
 import { ChatContext } from '../Context/Context';
+import Drawer from './Drawer'
 //import ProfileInfo from './ProfileInfo'
 import { useNavigate} from 'react-router-dom'
+import { Stack } from '@mui/system';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -63,12 +65,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
  const Navbar = ()=> {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [ mobileMoreAnchorEl, setMobileMoreAnchorEl ] = React.useState( null );
-  const [search, setSearch] = useState("");
-  const [searchResult, setSearchResult] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [ loadingChat, setLoadingChat ] = useState( false );
-  const [ onClose, setOnclose ] = useState( false )
-  const [isOpen ,setIsOpen ]  = useState(false);
+ 
 
   const navigate = useNavigate()
   const {user} = useContext(ChatContext)
@@ -99,17 +96,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     handleMobileMenuClose();
   };
 
-  const handleMenuChats = () => {
-    console.log('chats')
-  }
-
   const handleMenuAccount = () => {
     console.log('account');
   }
 
-  const handleMenuLogout = () => {
-    console.log('Logout');
-  }
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -268,18 +258,18 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
             sx={{ display: { xs: 'none', sm: 'block' } }}
           >
             ChapApp
-          </Typography>
-            <Search>
-              <Button variant='ghost' sx={{display : 'flex', justifyContent:'space-between'}}>
-               <SearchIconWrapper>
-                  <SearchIcon />
-                </SearchIconWrapper>
-                <StyledInputBase
+             </Typography>
+             <Stack direction='row' sx={{padding:0, marginLeft:'100px'}}>
+                <SearchIcon />
+               <Search >
+                <Drawer sx={{width: '300px'}}>
+                  <StyledInputBase
                   placeholder="Search…"
                   inputProps={{ 'aria-label': 'search' }}
-               />
-            </Button> 
-          </Search>
+                 /> 
+                </Drawer>
+            </Search>
+             </Stack>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
@@ -311,33 +301,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
       {renderMobileMenu}
       {renderMenu}
     </Box>
-    {/* <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
-
-          
-            <Box d="flex" pb={2}>
-              <TextField
-                placeholder="Search by name or email"
-                mr={2}
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
-              <Button onClick={handleSearch}>Go</Button>
-            </Box>
-            {loading ? (
-              <ChatLoading />
-            ) : (
-              searchResult?.map((user) => (
-                <UserListItem
-                  key={user._id}
-                  user={user}
-                  handleFunction={() => accessChat(user._id)}
-                />
-              ))
-            )}
-            {loadingChat && <Spinner ml="auto" d="flex" />}
-          
-       
-      </Drawer> */}
     </>
   );
 }
