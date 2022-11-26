@@ -13,8 +13,7 @@ const style = {
   bgcolor: 'background.paper',
   boxShadow: 32,
   p: 2,
-  
-  
+
 };
 
 export default function Drawer() {
