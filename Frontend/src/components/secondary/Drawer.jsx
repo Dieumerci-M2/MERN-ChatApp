@@ -7,6 +7,7 @@ import { Stack, TextField, List, ListItem } from '@mui/material';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import ChatLoading from '../useAvatar/ChatLoading';
+import UserListItem from '../useAvatar/UserListItem';
 
 const style = {
   position: 'absolute',
@@ -48,7 +49,8 @@ export default function Drawer({toastOptions, user, accessChat}) {
       setSearchResult( data )
       
     } catch (error) {
-      toast.error(`Failed to search on the server`, toastOptions)
+      toast.error( `Failed to search on the server`, toastOptions )
+      console.log(error.message);
     }
   }
   return (
@@ -79,15 +81,13 @@ export default function Drawer({toastOptions, user, accessChat}) {
             <ChatLoading style={ style } /> :
             (
               searchResult?.map((user) => (
-                <List key={user._id}>
-                  <ListItem>
-                    user={ user }
-                    handleFunction={() => accessChat(user._id)}
-                  </ListItem>
-                </List>
+                  <UserListItem
+                  key={ user._id }
+                  user={user}
+                  handleFunction={() => accessChat(user._id)}
+                  />
               ))
             ) }
-         
         </Box>
       </Modal>
     </div>
