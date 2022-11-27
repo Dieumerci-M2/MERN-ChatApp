@@ -16,8 +16,8 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import {Button } from '@mui/material';
-import { ChatContext } from '../Context/Context';
-import Drawer from './Drawer'
+import { ChatContext } from '../../Context/Context';
+import Drawer from '../secondary/Drawer'
 
 import { useNavigate} from 'react-router-dom'
 import { Stack } from '@mui/system';
@@ -63,8 +63,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
  const Navbar = ({toastOptions})=> {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [ mobileMoreAnchorEl, setMobileMoreAnchorEl ] = React.useState( null );
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [ mobileMoreAnchorEl, setMobileMoreAnchorEl ] = useState( null );
+  const [loadingChat, setLoadingChat] = useState(false) 
  
 
   const navigate = useNavigate()
@@ -223,9 +224,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     } catch (error) {
       toast.error(`Error fetching the chat`, toastOptions);
     }
-  };
-
-
+   };
+   
    return (
     <>
     <Box sx={{ flexGrow: 1, color:'#37474f'}}>
@@ -251,7 +251,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
              <Stack direction='row' sx={{padding:0, marginLeft:'100px'}}>
                 <SearchIcon />
                <Search >
-                <Drawer sx={{width: '300px'}} toastOptions={toastOptions}>
+                 <Drawer
+                   sx={ { width: '300px' } }
+                   toastOptions={ toastOptions }
+                   setLoading={ setLoadingChat }
+                   user={ user }
+                   accessChat = {accessChat}
+                 >
                   <StyledInputBase
                   placeholder="Search…"
                   inputProps={{ 'aria-label': 'search' }}
