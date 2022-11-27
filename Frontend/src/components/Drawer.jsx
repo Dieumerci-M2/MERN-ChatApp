@@ -1,8 +1,10 @@
-import * as React from 'react';
+import React, {useState} from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import { Stack, TextField } from '@mui/material';
+import { ToastContainer, toast } from 'react-toastify';
 
 const style = {
   position: 'absolute',
@@ -16,11 +18,17 @@ const style = {
 
 };
 
-export default function Drawer() {
-  const [open, setOpen] = React.useState(false);
+export default function Drawer({toastOptions}) {
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => setOpen( false );
+  const [search, setSearch] = useState("")
 
+  const onclickHandler = () => {
+    if ( !search ) {
+      toast.error( 'Please enter something to search' , toastOptions)
+    }
+  }
   return (
     <div>
       <Button onClick={handleOpen} variant='text'></Button>
@@ -34,9 +42,17 @@ export default function Drawer() {
           <Typography id="modal-modal-title" variant="h6" component="h2" >
             Search User
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
+          <Stack direction='row' mt={2}>
+            <TextField
+              id="outlined-basic"
+              label="Search name or email"
+              variant="outlined"
+              value={ search }
+              onChange={(e)=> setSearch(e.target.value)}
+            />
+            <Button vriant='ghost' onClick={onclickHandler}>Go</Button>
+          </Stack>
+         
         </Box>
       </Modal>
     </div>

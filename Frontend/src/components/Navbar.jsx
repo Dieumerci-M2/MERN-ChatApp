@@ -18,7 +18,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import {Button } from '@mui/material';
 import { ChatContext } from '../Context/Context';
 import Drawer from './Drawer'
-//import ProfileInfo from './ProfileInfo'
+
 import { useNavigate} from 'react-router-dom'
 import { Stack } from '@mui/system';
 
@@ -62,7 +62,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
- const Navbar = ()=> {
+ const Navbar = ({toastOptions})=> {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [ mobileMoreAnchorEl, setMobileMoreAnchorEl ] = React.useState( null );
  
@@ -72,11 +72,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
   const isMenuOpen = Boolean(anchorEl);
    const isMobileMenuOpen = Boolean( mobileMoreAnchorEl );
-   
-   const handleSearch = async () => { 
-     console.log('hanlesearch')
-   }
-
+  
    const logout = () => {
      localStorage.removeItem( 'infoUser' )
      navigate('/')
@@ -225,14 +221,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
       setLoadingChat(false);
       onClose();
     } catch (error) {
-      toast({
-        title: "Error fetching the chat",
-        description: error.message,
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-        position: "bottom-left",
-      });
+      toast.error(`Error fetching the chat`, toastOptions);
     }
   };
 
@@ -262,7 +251,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
              <Stack direction='row' sx={{padding:0, marginLeft:'100px'}}>
                 <SearchIcon />
                <Search >
-                <Drawer sx={{width: '300px'}}>
+                <Drawer sx={{width: '300px'}} toastOptions={toastOptions}>
                   <StyledInputBase
                   placeholder="Search…"
                   inputProps={{ 'aria-label': 'search' }}
