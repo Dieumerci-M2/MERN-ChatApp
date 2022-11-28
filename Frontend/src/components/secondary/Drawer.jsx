@@ -27,7 +27,6 @@ export default function Drawer({toastOptions, user, accessChat}) {
   const handleClose = () => setOpen( false );
   const [ search, setSearch ] = useState( "" )
   const [ searchResult, setSearchResult ] = useState( [] )
-  const [ loadingChat, setLoadingChat ] = useState()
   const [loading, setLoading] = useState(false);
   
   const onclickHandler = async() => {

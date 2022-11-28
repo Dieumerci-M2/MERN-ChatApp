@@ -15,7 +15,6 @@ import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import {Button } from '@mui/material';
 import { ChatContext } from '../../Context/Context';
 import Drawer from '../secondary/Drawer'
 
@@ -66,10 +65,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   const [anchorEl, setAnchorEl] = useState(null);
   const [ mobileMoreAnchorEl, setMobileMoreAnchorEl ] = useState( null );
   const [loadingChat, setLoadingChat] = useState(false) 
- 
 
   const navigate = useNavigate()
-  const {user} = useContext(ChatContext)
+  const {user, setSelectedChat, chats, setChats} = useContext(ChatContext)
 
   const isMenuOpen = Boolean(anchorEl);
    const isMobileMenuOpen = Boolean( mobileMoreAnchorEl );
