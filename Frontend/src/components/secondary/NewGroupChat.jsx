@@ -1,6 +1,6 @@
 import React from 'react'
 
-const SingleChat = () => {
+const NewGroupChat = ({children}) => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const SingleChat = () => {
   )
 }
 
-export default SingleChat
+export default NewGroupChat

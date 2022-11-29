@@ -4,7 +4,7 @@ import Post from '../secondary/Post';
 
 const Rightbar = () => {
   return (
-   <Box sx={ { display: { xs: 'none', sm: 'block' } } } flex={ 2 } p={ 2 } >
+   <Box sx={ { display: { xs: 'none', sm: 'block' } } } flex={ 2 } pr={ 4 } >
       <Box position='fixed'>
         <Box mt={1} sx={{borderButtom:'1px solid black'}}>
           <Typography fontWeight={ 200 }>Online Friends</Typography>
