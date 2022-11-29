@@ -29,12 +29,12 @@ app.get( '/', ( req, res ) => {
     res.send('API is Runnig verry Well')
 } )
 
-app.options(/.*/,( req, res ) => {
-    res.setHeader( 'Access-Control-Allow-Methods', 'POST, GET, OPTIONS' );
-    res.setHeader( 'Access-Control-Allow-Headers', '*' );
-    res.setHeader( 'Access-Control-Allow-Origin',`http://${req.hostname}:5173`)
-    res.end();
-})
+// app.options(/.*/,( req, res ) => {
+//     res.setHeader( 'Access-Control-Allow-Methods', 'POST, GET, OPTIONS' );
+//     res.setHeader( 'Access-Control-Allow-Headers', '*' );
+//     res.setHeader( 'Access-Control-Allow-Origin',`http://${req.hostname}:5173`)
+//     res.end();
+// })
 app.use( '/api/user', userRoute )
 app.use( '/api/chat', chatRoute )
 app.use('/api/message', messageRoute)
