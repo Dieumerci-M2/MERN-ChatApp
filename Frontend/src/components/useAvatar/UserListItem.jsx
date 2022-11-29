@@ -1,5 +1,4 @@
 import React from 'react'
-import SingleChat from './SingleChat'
 import {Box, Avatar, Typography, ListItemAvatar} from '@mui/material'
 
 const UserListItem = ({user, handlerFunction}) => {
@@ -30,7 +29,6 @@ const UserListItem = ({user, handlerFunction}) => {
               <Typography variant="body1" color="initial">{ user.name }</Typography>
               <Typography variant="body1" color="initial">Email : { user.email}</Typography>
         </Box>
-      <SingleChat fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} />
     </Box>
   )
 }

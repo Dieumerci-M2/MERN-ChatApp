@@ -9,7 +9,7 @@ import ChatLoading from '../useAvatar/ChatLoading';
 import { getSender } from '../config/LogicOfChat';
 import NewGroupChat from './NewGroupChat';
 
-const ListChat = ( { fetchAgain, toastOptions } ) => {
+const ListChat = ( {fetchAgain, toastOptions } ) => {
 
   const { user, setSelectedChat,selectedChat, chats, setChats } = useContext( ChatContext )
   const [ loggedUser, setLoggedUser ] = useState()
@@ -23,7 +23,7 @@ const ListChat = ( { fetchAgain, toastOptions } ) => {
         },
       };
 
-      const { data } = await axios.get("/api/chat", config);
+      const { data } = await axios.get("https://mernchat-rtv3.onrender.com/api/chat", config);
       setChats(data);
     } catch (error) {
       toast.error( `Failed to load the chats`, toastOptions );
