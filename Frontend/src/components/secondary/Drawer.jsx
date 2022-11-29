@@ -44,7 +44,7 @@ export default function Drawer({toastOptions, user, accessChat, loadingChat}) {
         },
       }
       console.log(search);
-      const { data } = await axios.get( `${import.meta.env.VITE_APP_URL}/api/user?search=${ search }`, config )
+      const { data } = await axios.get( `http://localhost:6600/api/user?search=${ search }`, config )
 
       setLoading(false)
       setSearchResult( data )
