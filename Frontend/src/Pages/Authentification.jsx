@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
-  import 'react-toastify/dist/ReactToastify.css';
+import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate} from 'react-router-dom'
 import { Stack, Button, TextField, Container, InputAdornment, Box, Tabs, Tab, Typography, Alert, Snackbar} from '@mui/material'
 import VisibilityIcon from '@mui/icons-material/Visibility';
@@ -20,10 +20,17 @@ const Authentification = () => {
   const [ hiden, setHiden ] = useState( true )
   
   const navigateTo = useNavigate()
+
+  useEffect( () => {
+    const userInfo = JSON.parse( localStorage.getItem( 'infoUser' ) )
+    if ( userInfo ) {
+      navigateTo('/chats')
+    }
+  },[navigateTo])
   
   const toastOptions = {
     position: "bottom-right",
-    autoClose: 8000,
+    autoClose: 2000,
     pauseOnHover: true,
     draggable: true,
     theme: "dark",

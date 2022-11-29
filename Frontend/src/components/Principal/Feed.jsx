@@ -1,7 +1,7 @@
 import React from 'react';
 import Box from '@mui/material/Box';
-import ListChat from './ListChat';
-import Message from './Message';
+import ListChat from '../secondary/ListChat';
+import Message from '../secondary/Message';
 const Feed = () => {
 
   return (

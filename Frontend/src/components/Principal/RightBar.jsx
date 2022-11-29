@@ -1,6 +1,6 @@
 import { Box, Typography, Avatar, AvatarGroup, ImageList, ImageListItem } from '@mui/material'
 import React from 'react'
-import Post from './Post';
+import Post from '../secondary/Post';
 
 const Rightbar = () => {
   return (

@@ -15,8 +15,11 @@ import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { Drawer, TextField, Button } from '@mui/material';
-import { ChatContext } from '../Context/Context';
+import { ChatContext } from '../../Context/Context';
+import Drawer from '../secondary/Drawer'
+
+import { useNavigate} from 'react-router-dom'
+import { Stack } from '@mui/system';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -58,25 +61,21 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
- const Navbar = ()=> {
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [ mobileMoreAnchorEl, setMobileMoreAnchorEl ] = React.useState( null );
-  const [search, setSearch] = useState("");
-  const [searchResult, setSearchResult] = useState([]);
-  const [loading, setLoading] = useState(false);
-   const [ loadingChat, setLoadingChat ] = useState( false );
-   const [ onClose, setOnclose ] = useState( false )
-    const [isOpen ,setIsOpen ]  = useState(false);
+ const Navbar = ({toastOptions})=> {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [ mobileMoreAnchorEl, setMobileMoreAnchorEl ] = useState( null );
+  const [loadingChat, setLoadingChat] = useState(false) 
 
-   
-  const {user} = useContext(ChatContext)
+  const navigate = useNavigate()
+  const {user, setSelectedChat, chats, setChats} = useContext(ChatContext)
 
   const isMenuOpen = Boolean(anchorEl);
    const isMobileMenuOpen = Boolean( mobileMoreAnchorEl );
-   
-   const handleSearch = async () => { 
-     
-   }
+  
+   const logout = () => {
+     localStorage.removeItem( 'infoUser' )
+     navigate('/')
+  }
     
 
   const handleOpenUserMenu = (event) => {
@@ -92,17 +91,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     handleMobileMenuClose();
   };
 
-  const handleMenuChats = () => {
-    console.log('chats')
-  }
-
   const handleMenuAccount = () => {
     console.log('account');
   }
 
-  const handleMenuLogout = () => {
-    console.log('Logout');
-  }
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -120,9 +112,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuChats}>Instant Chats</MenuItem>
       <MenuItem onClick={ handleMenuAccount}>My account</MenuItem>
-      <MenuItem onClick={ handleMenuLogout }>Logout</MenuItem>
+      <MenuItem onClick={ logout}>Logout</MenuItem>
     </Menu>
   );
 
@@ -229,18 +220,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
       setLoadingChat(false);
       onClose();
     } catch (error) {
-      toast({
-        title: "Error fetching the chat",
-        description: error.message,
-        status: "error",
-        duration: 5000,
-        isClosable: true,
-        position: "bottom-left",
-      });
+      toast.error(`Error fetching the chat`, toastOptions);
     }
-  };
-
-
+   };
+   
    return (
     <>
     <Box sx={{ flexGrow: 1, color:'#37474f'}}>
@@ -262,16 +245,24 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
             sx={{ display: { xs: 'none', sm: 'block' } }}
           >
             ChapApp
-          </Typography>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </Search>
+             </Typography>
+             <Stack direction='row' sx={{padding:0, marginLeft:'100px'}}>
+                <SearchIcon />
+               <Search >
+                 <Drawer
+                   sx={ { width: '300px' } }
+                   toastOptions={ toastOptions }
+                   setLoading={ setLoadingChat }
+                   user={ user }
+                   accessChat = {accessChat}
+                 >
+                  <StyledInputBase
+                  placeholder="Search…"
+                  inputProps={{ 'aria-label': 'search' }}
+                 /> 
+                </Drawer>
+            </Search>
+             </Stack>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
@@ -303,33 +294,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
       {renderMobileMenu}
       {renderMenu}
     </Box>
-    {/* <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
-
-          
-            <Box d="flex" pb={2}>
-              <TextField
-                placeholder="Search by name or email"
-                mr={2}
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
-              <Button onClick={handleSearch}>Go</Button>
-            </Box>
-            {loading ? (
-              <ChatLoading />
-            ) : (
-              searchResult?.map((user) => (
-                <UserListItem
-                  key={user._id}
-                  user={user}
-                  handleFunction={() => accessChat(user._id)}
-                />
-              ))
-            )}
-            {loadingChat && <Spinner ml="auto" d="flex" />}
-          
-       
-      </Drawer> */}
     </>
   );
 }
