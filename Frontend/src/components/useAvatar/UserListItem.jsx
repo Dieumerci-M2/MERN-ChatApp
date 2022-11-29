@@ -1,6 +1,6 @@
 import React from 'react'
 import SingleChat from './SingleChat'
-import {Box, Avatar, Typography} from '@mui/material'
+import {Box, Avatar, Typography, ListItemAvatar} from '@mui/material'
 
 const UserListItem = ({user, handlerFunction}) => {
      

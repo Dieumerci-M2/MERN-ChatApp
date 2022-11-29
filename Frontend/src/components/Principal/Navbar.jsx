@@ -1,4 +1,5 @@
-import React,{useContext, useState} from 'react';
+import React, { useContext, useState } from 'react';
+import axios from 'axios'
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -67,7 +68,11 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   const [loadingChat, setLoadingChat] = useState(false) 
 
   const navigate = useNavigate()
-  const {user, setSelectedChat, chats, setChats} = useContext(ChatContext)
+   const {
+     user,
+     setSelectedChat,
+     chats,
+     setChats } = useContext( ChatContext )
 
   const isMenuOpen = Boolean(anchorEl);
    const isMobileMenuOpen = Boolean( mobileMoreAnchorEl );
@@ -226,7 +231,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
    
    return (
     <>
-    <Box sx={{ flexGrow: 1, color:'#37474f'}}>
+    <Box sx={{ flexGrow: 1, color:'#37474f'}} >
       <AppBar position="static" sx={{backgroundColor:'#37474f'}}>
         <Toolbar>
           <IconButton
@@ -252,7 +257,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
                  <Drawer
                    sx={ { width: '300px' } }
                    toastOptions={ toastOptions }
-                   setLoading={ setLoadingChat }
+                   loadingChat={loadingChat}
                    user={ user }
                    accessChat = {accessChat}
                  >

@@ -141,7 +141,7 @@ const Authentification = () => {
     }
   }
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="sm" bgcolor={'#f5f5f5'}>
       <Stack spacing={ 2 } mt={ 15 } sx={ { backgroundColor: 'initial', borderRadius: '10px', border:'1px solid #cfd8dc' } }>
         <Box sx={{ borderBottom: 1, borderColor: '#cfd8dc' }}>
           <Tabs value={value} onChange={changeTabs} aria-label="basic tabs example" >

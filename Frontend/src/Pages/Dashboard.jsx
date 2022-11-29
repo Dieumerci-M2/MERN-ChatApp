@@ -30,11 +30,11 @@ const Dashboard = () => {
   };
   return (
     <ThemeProvider theme={darkTheme}>
-      <Box bgcolor={'background.default'} color={'text.primary'}>
+      <Box bgcolor={'#f5f5f5'} color={'text.primary'}>
         <Navbar toastOptions={ toastOptions} /> 
       <Stack direction='row' spacing={2} sx={{justifyContent:'space-between'}}>
           <Sidebar setMode={ setMode } mode={ mode} />
-        <Feed />
+          <Feed toastOptions={ toastOptions } />
         <Rightbar />
       </Stack>
         <AddPost />

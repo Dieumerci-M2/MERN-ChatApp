@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import { Stack, TextField, List, ListItem } from '@mui/material';
+import { Stack, TextField, Backdrop, CircularProgress} from '@mui/material';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import ChatLoading from '../useAvatar/ChatLoading';
@@ -21,13 +21,14 @@ const style = {
 
 };
 
-export default function Drawer({toastOptions, user, accessChat}) {
+export default function Drawer({toastOptions, user, accessChat, loadingChat}) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen( false );
-  const [ search, setSearch ] = useState( "" )
+  const [ search, setSearch ] = useState( "ne" )
   const [ searchResult, setSearchResult ] = useState( [] )
   const [loading, setLoading] = useState(false);
+  
   
   const onclickHandler = async() => {
     if ( !search ) {
@@ -42,7 +43,8 @@ export default function Drawer({toastOptions, user, accessChat}) {
           Authorization: `Bearer ${ user.token}`,
         },
       }
-      const { data } = await axios.get( `/api/user?search=${ search }`, config )
+      console.log(search);
+      const { data } = await axios.get( `http://localhost:6600/api/user?search=${ search }`, config )
 
       setLoading(false)
       setSearchResult( data )
@@ -87,6 +89,14 @@ export default function Drawer({toastOptions, user, accessChat}) {
                   />
               ))
             ) }
+          { loadingChat && (
+            <Backdrop
+              sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+              >
+            <CircularProgress color="inherit" />
+            </Backdrop>
+           )
+          }
         </Box>
       </Modal>
     </div>
