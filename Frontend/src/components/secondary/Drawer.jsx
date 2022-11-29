@@ -25,7 +25,7 @@ export default function Drawer({toastOptions, user, accessChat, loadingChat}) {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen( false );
-  const [ search, setSearch ] = useState( "ne" )
+  const [ search, setSearch ] = useState( "" )
   const [ searchResult, setSearchResult ] = useState( [] )
   const [loading, setLoading] = useState(false);
   
@@ -44,7 +44,7 @@ export default function Drawer({toastOptions, user, accessChat, loadingChat}) {
         },
       }
       console.log(search);
-      const { data } = await axios.get( `http://localhost:6600/api/user?search=${ search }`, config )
+      const { data } = await axios.get( `https://mernchat-rtv3.onrender.com/api/user?search=${ search }`, config )
 
       setLoading(false)
       setSearchResult( data )

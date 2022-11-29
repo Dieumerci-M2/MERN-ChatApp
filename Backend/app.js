@@ -1,6 +1,7 @@
 const express = require( 'express' )
 const dotenv = require('dotenv')
 const app = express()
+const cors = require('cors')
 const ConnectionDB = require('./config/db')
 const colors = require( 'colors' )
 const userRoute = require( './Routes/UserRoute' )
@@ -15,6 +16,7 @@ dotenv.config()
 
 ConnectionDB()
 
+app.use(cors())
 app.use( (req, res, next) => {
     res.setHeader( 'Access-Control-Allow-Origin', '*' );
     next();
