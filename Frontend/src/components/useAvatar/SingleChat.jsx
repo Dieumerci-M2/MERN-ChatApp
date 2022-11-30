@@ -66,6 +66,39 @@ const SingleChat = ( { fetchAgain, setFetchAgain, toastOptions } ) => {
     }
   };
   
+    useEffect(() => {
+    socket = io(ENDPOINT);
+    socket.emit("setup", user);
+    socket.on("connected", () => setSocketConnected(true));
+    socket.on("typing", () => setIsTyping(true));
+    socket.on("stop typing", () => setIsTyping(false));
+
+    }, [] )
+  
+     useEffect(() => {
+    fetchMessages();
+
+    selectedChatCompare = selectedChat;
+  
+  }, [selectedChat]);
+  
+   useEffect(() => {
+    socket.on("message recieved", (newMessageRecieved) => {
+      if (
+        !selectedChatCompare || // if chat is not selected or doesn't match current chat
+        selectedChatCompare._id !== newMessageRecieved.chat._id
+      ) {
+        if (!notification.includes(newMessageRecieved)) {
+          setNotification([newMessageRecieved, ...notification]);
+          setFetchAgain(!fetchAgain);
+        }
+      } else {
+        setMessages([...messages, newMessageRecieved]);
+      }
+    });
+   } );
+  
+  
   return (
     <>
       { selectedChat ? (
