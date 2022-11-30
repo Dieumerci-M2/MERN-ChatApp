@@ -1,6 +1,6 @@
 import React from 'react'
 
-const SingleChat = () => {
+const SingleChat = ({fetchAgain, setFetchAgain}) => {
   return (
     <div>
       
