@@ -39,6 +39,32 @@ const SingleChat = ( { fetchAgain, setFetchAgain, toastOptions } ) => {
     }
   };
 
+   const sendMessage = async (event) => {
+    if (event.key === "Enter" && newMessage) {
+      socket.emit("stop typing", selectedChat._id);
+      try {
+        const config = {
+          headers: {
+            "Content-type": "application/json",
+            Authorization: `Bearer ${user.token}`,
+          },
+        };
+        setNewMessage("");
+        const { data } = await axios.post(
+          "https://mernchat-rtv3.onrender.com/api/message",
+          {
+            content: newMessage,
+            chatId: selectedChat,
+          },
+          config
+        );
+        socket.emit("new message", data);
+        setMessages([...messages, data]);
+      } catch (error) {
+        toast.error(`Failed to send the Message`, toastOptions);
+      }
+    }
+  };
   
   return (
     <>
