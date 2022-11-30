@@ -1,7 +1,8 @@
 import React, { useState, useContext } from 'react'
 import { toast } from 'react-toastify'
 import { ChatContext } from '../../Context/Context'
-import {Box, Typography} from '@mui/material'
+import { Box, TextField, Typography } from '@mui/material'
+import ChatScrollable from './ChatScrollable'
 
 const SingleChat = ( { fetchAgain, setFetchAgain, toastOptions } ) => {
   const { user, selectedChat, setSelectedChat } = useContext( ChatContext )
@@ -11,7 +12,33 @@ const SingleChat = ( { fetchAgain, setFetchAgain, toastOptions } ) => {
   const [newMessage, setNewMessage] = useState("");
   const [socketConnected, setSocketConnected] = useState(false);
   const [typing, setTyping] = useState(false);
-  const [istyping, setIsTyping] = useState(false);
+  const [ istyping, setIsTyping ] = useState( false );
+  
+    const fetchMessages = async () => {
+    if (!selectedChat) return;
+
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+        },
+      };
+
+      setLoading(true);
+
+      const { data } = await axios.get(
+        `https://mernchat-rtv3.onrender.com/api/message/${selectedChat._id}`,
+        config
+      );
+      setMessages(data);
+      setLoading(false);
+
+      socket.emit("join chat", selectedChat._id);
+    } catch (error) {
+      toast.error(`Failed to load the message`, toastOptions);
+    }
+  };
+
   
   return (
     <>
@@ -44,7 +71,38 @@ const SingleChat = ( { fetchAgain, setFetchAgain, toastOptions } ) => {
             {
               loading ?
                 'loading' :
-                '' }
+                (
+                  <div className="messages">
+                    <ScrollableChat messages={messages} />
+                  </div>
+                ) }
+            
+             <FormControl
+              onKeyDown={''}
+              id="first-name"
+              isRequired
+              mt={3}
+            >
+              {istyping ? (
+                <div>
+                  <Lottie
+                    options={defaultOptions}
+                    // height={50}
+                    width={70}
+                    style={{ marginBottom: 15, marginLeft: 0 }}
+                  />
+                </div>
+              ) : (
+                <></>
+              )}
+              <TextField
+                variant="filled"
+                bg="#E0E0E0"
+                placeholder="Enter a message.."
+                value={newMessage}
+                onChange={typingHandler}
+              />
+            </FormControl>
         </Box>  
       </>
 
