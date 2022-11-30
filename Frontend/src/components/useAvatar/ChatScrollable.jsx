@@ -1,6 +1,8 @@
 import React from 'react'
-
-const ChatScrollable = () => {
+import { Avatar } from "@chakra-ui/avatar";
+import { Tooltip } from "@chakra-ui/tooltip";
+import ScrollableFeed from "react-scrollable-feed";
+const ChatScrollable = ({messages}) => {
   return (
     <div>
       
