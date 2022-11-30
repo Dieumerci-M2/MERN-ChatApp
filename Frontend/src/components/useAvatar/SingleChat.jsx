@@ -98,7 +98,27 @@ const SingleChat = ( { fetchAgain, setFetchAgain, toastOptions } ) => {
     });
    } );
   
-  
+    const typingHandler = (e) => {
+    setNewMessage(e.target.value);
+
+    if (!socketConnected) return;
+
+    if (!typing) {
+      setTyping(true);
+      socket.emit("typing", selectedChat._id);
+    }
+    let lastTypingTime = new Date().getTime();
+    const timerLength = 3000;
+    setTimeout(() => {
+      let timeNow = new Date().getTime();
+      let timeDiff = timeNow - lastTypingTime;
+      if (timeDiff >= timerLength && typing) {
+        socket.emit("stop typing", selectedChat._id);
+        setTyping(false);
+      }
+    }, timerLength);
+  };
+
   return (
     <>
       { selectedChat ? (
@@ -132,7 +152,7 @@ const SingleChat = ( { fetchAgain, setFetchAgain, toastOptions } ) => {
                 'loading' :
                 (
                   <div className="messages">
-                    <ScrollableChat messages={messages} />
+                    <ChatScrollable messages={messages} />
                   </div>
                 ) }
             
