@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import './style.css'
 import { toast } from 'react-toastify'
 import { ChatContext } from '../../Context/Context'
@@ -6,6 +6,13 @@ import { Box, TextField, Typography, Skeleton} from '@mui/material'
 import ChatScrollable from './ChatScrollable'
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
+import Lottie from 'react-lottie'
+import animationData from "../Animation/Lottie.json";
+
+import io from "socket.io-client";
+
+const ENDPOINT = 'https://mernchat-rtv3.onrender.com' 
+let socket, selectedChatCompare
 
 const SingleChat = ( { fetchAgain, setFetchAgain, toastOptions } ) => {
   const { user, selectedChat, setSelectedChat } = useContext( ChatContext )
@@ -22,6 +29,15 @@ const SingleChat = ( { fetchAgain, setFetchAgain, toastOptions } ) => {
     setOpen(true);
   };
 
+    const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+    };
+  
     const fetchMessages = async () => {
     if (!selectedChat) return;
 
@@ -182,11 +198,11 @@ const SingleChat = ( { fetchAgain, setFetchAgain, toastOptions } ) => {
             >
               {istyping ? (
                
-                <Box sx={{ width: 300 }}>
-                  <Skeleton />
-                  <Skeleton animation="wave" />
-                  <Skeleton animation={false} />
-                </Box>
+               <Lottie
+                    options={defaultOptions}
+                    width={70}
+                    style={{ marginBottom: 15, marginLeft: 0 }}
+                  />
 
               ) : (
                 <></>
