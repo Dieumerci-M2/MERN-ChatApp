@@ -1,8 +1,18 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
+import './style.css'
 import { toast } from 'react-toastify'
 import { ChatContext } from '../../Context/Context'
-import { Box, TextField, Typography } from '@mui/material'
+import { Box, TextField, Typography, Skeleton} from '@mui/material'
 import ChatScrollable from './ChatScrollable'
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
+import Lottie from 'react-lottie'
+import animationData from "../Animation/Lottie.json";
+
+import io from "socket.io-client";
+
+const ENDPOINT = 'https://mernchat-rtv3.onrender.com' 
+let socket, selectedChatCompare
 
 const SingleChat = ( { fetchAgain, setFetchAgain, toastOptions } ) => {
   const { user, selectedChat, setSelectedChat } = useContext( ChatContext )
@@ -13,6 +23,20 @@ const SingleChat = ( { fetchAgain, setFetchAgain, toastOptions } ) => {
   const [socketConnected, setSocketConnected] = useState(false);
   const [typing, setTyping] = useState(false);
   const [ istyping, setIsTyping ] = useState( false );
+  const [ open, setOpen ] = useState( false );
+  
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+    const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+    };
   
     const fetchMessages = async () => {
     if (!selectedChat) return;
@@ -149,7 +173,17 @@ const SingleChat = ( { fetchAgain, setFetchAgain, toastOptions } ) => {
           >
             {
               loading ?
-                'loading' :
+                (
+
+          <Backdrop
+            sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+            open={open}
+            onClick={handleOpen}
+          >
+            <CircularProgress color="inherit" />
+          </Backdrop>
+            )
+              :
                 (
                   <div className="messages">
                     <ChatScrollable messages={messages} />
@@ -157,20 +191,19 @@ const SingleChat = ( { fetchAgain, setFetchAgain, toastOptions } ) => {
                 ) }
             
              <FormControl
-              onKeyDown={''}
+              onKeyDown={sendMessage}
               id="first-name"
               isRequired
               mt={3}
             >
               {istyping ? (
-                <div>
-                  <Lottie
+               
+               <Lottie
                     options={defaultOptions}
-                    // height={50}
                     width={70}
                     style={{ marginBottom: 15, marginLeft: 0 }}
                   />
-                </div>
+
               ) : (
                 <></>
               )}
