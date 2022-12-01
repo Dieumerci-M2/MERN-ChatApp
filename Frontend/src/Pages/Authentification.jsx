@@ -58,7 +58,7 @@ const Authentification = () => {
       const { data } = await axios.post( "https://mernchat-rtv3.onrender.com/api/user/login", { email: LogEmail, password: LogPassword }, config )
       
        toast.success( 'registration successful', toastOptions )
-      console.log(data);
+      
       localStorage.setItem( 'InfoUser', JSON.stringify(data))
       navigateTo( '/chats' )
       setUpload(false)

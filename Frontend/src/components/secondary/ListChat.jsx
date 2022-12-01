@@ -15,7 +15,7 @@ const ListChat = ( {fetchAgain, toastOptions } ) => {
   const [ loggedUser, setLoggedUser ] = useState()
   
   const fetchChats = async () => {
-     console.log(user._id);
+     console.log(user);
     try {
       const config = {
         headers: {
