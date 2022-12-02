@@ -1,6 +1,5 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 
@@ -16,14 +15,19 @@ const style = {
   p: 4,
 };
 
- const ProfileInfo = ()=> {
-  const [open, setOpen] = React.useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
+
+ const ProfileInfo = ({user, children})=> {
+  const [open, setOpen] = useState(false);
+  const handleClose = () => setOpen( false );
+  const handleOpen = () => setOpen(true) 
+
+   
   return (
     <div>
-      <Button onClick={handleOpen}>Open modal</Button>
+
+      {children ? <span onClick={handleOpen}></span>: <></> }
+    
       <Modal
         open={open}
         onClose={handleClose}
@@ -43,4 +47,4 @@ const style = {
   );
  }
 
-module.exports = ProfileInfo
+export default ProfileInfo

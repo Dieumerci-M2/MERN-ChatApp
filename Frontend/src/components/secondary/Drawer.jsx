@@ -9,6 +9,7 @@ import axios from 'axios';
 import ChatLoading from '../useAvatar/ChatLoading';
 import UserListItem from '../useAvatar/UserListItem';
 
+
 const style = {
   position: 'absolute',
   top: '20%',
@@ -43,7 +44,7 @@ export default function Drawer({toastOptions, user, accessChat, loadingChat}) {
           Authorization: `Bearer ${ user.token}`,
         },
       }
-      console.log(search);
+    
       const { data } = await axios.get( `https://mernchat-rtv3.onrender.com/api/user?search=${ search }`, config )
 
       setLoading(false)

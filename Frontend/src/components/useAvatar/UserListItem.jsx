@@ -25,9 +25,9 @@ const UserListItem = ({user, handlerFunction}) => {
         <ListItemAvatar>
         <Avatar alt={user.name} src={user.picture} />
         </ListItemAvatar> 
-          <Box>
-              <Typography variant="body1" color="initial">{ user.name }</Typography>
-              <Typography variant="body1" color="initial">Email : { user.email}</Typography>
+        <Box>
+          <Typography variant="body1" color="initial">{ user.name }</Typography>
+          <Typography variant="body1" color="initial">Email : { user.email}</Typography>
         </Box>
     </Box>
   )
