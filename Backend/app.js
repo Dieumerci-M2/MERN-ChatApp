@@ -16,11 +16,11 @@ dotenv.config()
 
 ConnectionDB()
 
-app.use(cors())
 app.use( (req, res, next) => {
     res.setHeader( 'Access-Control-Allow-Origin', '*' );
     next();
 } )
+app.use(cors())
 
 app.use( express.json() )
 app.use( express.urlencoded({extended: false}) )
@@ -46,10 +46,7 @@ app.use( notFound )
 const server = app.listen( Port, () => console.log( `server is running to port http://localhost:${ Port }`.yellow.bold ) )
 
 const io = require( 'socket.io' )( server, {
-    setTimeout: 60000,
-    cors: {
-        origin: 'http://localhost:3000'
-    }
+    setTimeout: 60000
 })
 
 io.on( "connection", ( socket ) => {

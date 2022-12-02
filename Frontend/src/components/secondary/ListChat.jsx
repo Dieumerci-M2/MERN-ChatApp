@@ -24,7 +24,8 @@ const ListChat = ( {fetchAgain, toastOptions } ) => {
       };
 
       const { data } = await axios.get("https://mernchat-rtv3.onrender.com/api/chat", config);
-      setChats(data);
+      setChats( data );
+      console.log(data);
     } catch (error) {
       toast.error( `Failed to load the chats`, toastOptions );
       console.log(error.message);

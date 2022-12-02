@@ -1,5 +1,5 @@
 
-import React,{useState, useEffect} from 'react';
+import React,{useState, useContext} from 'react';
 import Feed from '../components/Principal/Feed'
 import Sidebar from '../components/Principal/Sidebar'
 import Rightbar from '../components/Principal/RightBar'
@@ -10,10 +10,11 @@ import { ThemeProvider } from '@emotion/react';
 import { useNavigate } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ChatContext } from '../Context/Context';
 
 const Dashboard = () => {
 
-
+  const {user} = useContext(ChatContext)
   const [ mode, setMode ] = useState( 'light' )
   
   const darkTheme = createTheme( {
@@ -31,17 +32,16 @@ const Dashboard = () => {
   return (
     <ThemeProvider theme={darkTheme}>
       <Box bgcolor={'#f5f5f5'} color={'text.primary'}>
-        <Navbar toastOptions={ toastOptions} /> 
+        { user && <Navbar toastOptions={ toastOptions} /> }
       <Stack direction='row' spacing={2} sx={{justifyContent:'space-between'}}>
-          <Sidebar setMode={ setMode } mode={ mode} />
-          <Feed toastOptions={ toastOptions } />
-        <Rightbar />
+          { user && <Sidebar setMode={ setMode } mode={ mode } /> }
+          { user && <Feed toastOptions={ toastOptions } /> }
+          { user && <Rightbar /> }
       </Stack>
         <AddPost />
-        <ToastContainer/>
-    </Box>
-  </ThemeProvider>
-    
+        <ToastContainer />
+      </Box>
+  </ThemeProvider> 
   )
 }
 

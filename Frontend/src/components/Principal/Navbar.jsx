@@ -18,6 +18,8 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { ChatContext } from '../../Context/Context';
 import Drawer from '../secondary/Drawer'
+import ListChat from '../secondary/ListChat';
+import ProfileInfo from '../secondary/ProfileInfo';
 
 import { useNavigate} from 'react-router-dom'
 import { Stack } from '@mui/system';
@@ -95,11 +97,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     setAnchorEl(null);
     handleMobileMenuClose();
   };
-
-  const handleMenuAccount = () => {
-    console.log('account');
-  }
-
+ 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
     <Menu
@@ -117,7 +115,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={ handleMenuAccount}>My account</MenuItem>
+      
+        <MenuItem onClick={<ProfileInfo /> }>My account</MenuItem>
+      
       <MenuItem onClick={ logout}>Logout</MenuItem>
     </Menu>
   );
@@ -218,7 +218,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
           Authorization: `Bearer ${user.token}`,
         },
       };
-      const { data } = await axios.post(`/api/chat`, { userId }, config);
+      const { data } = await axios.post(`https://mernchat-rtv3.onrender.com/api/chat`, { userId }, config);
 
       if (!chats.find((c) => c._id === data._id)) setChats([data, ...chats]);
       setSelectedChat(data);
@@ -255,7 +255,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
                 <SearchIcon />
                <Search >
                  <Drawer
-                   sx={ { width: '300px' } }
+                   sx={ { width: '200px' , height:'100vh' } }
                    toastOptions={ toastOptions }
                    loadingChat={loadingChat}
                    user={ user }
