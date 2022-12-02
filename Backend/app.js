@@ -46,7 +46,10 @@ app.use( notFound )
 const server = app.listen( Port, () => console.log( `server is running to port http://localhost:${ Port }`.yellow.bold ) )
 
 const io = require( 'socket.io' )( server, {
-    setTimeout: 60000
+    setTimeout: 60000,
+    cors: {
+        origin: 'http://localhost:5173'
+    }
 })
 
 io.on( "connection", ( socket ) => {
