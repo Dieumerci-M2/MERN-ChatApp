@@ -18,6 +18,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { ChatContext } from '../../Context/Context';
 import Drawer from '../secondary/Drawer'
+import ListChat from '../secondary/ListChat';
 
 import { useNavigate} from 'react-router-dom'
 import { Stack } from '@mui/system';
@@ -255,7 +256,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
                 <SearchIcon />
                <Search >
                  <Drawer
-                   sx={ { width: '300px' } }
+                   sx={ { width: '200px' , height:'100vh' } }
                    toastOptions={ toastOptions }
                    loadingChat={loadingChat}
                    user={ user }
