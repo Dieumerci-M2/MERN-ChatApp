@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react'
 import './style.css'
 import { toast } from 'react-toastify'
 import { ChatContext } from '../../Context/Context'
-import { Box, TextField, Typography, Skeleton} from '@mui/material'
+import { Box, TextField, Typography, Skeleton, FormControl} from '@mui/material'
 import ChatScrollable from './ChatScrollable'
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -39,7 +39,7 @@ const SingleChat = ( { fetchAgain, setFetchAgain, toastOptions } ) => {
     };
   
     const fetchMessages = async () => {
-    if (!selectedChat) return;
+     if (!selectedChat) return;
 
     try {
       const config = {
@@ -150,16 +150,16 @@ const SingleChat = ( { fetchAgain, setFetchAgain, toastOptions } ) => {
           <Typography
             sx={ {
               display: { xs: '25px', md: '30px' },
-              width: '100%'
-            
+              position: 'absolute',
+              bottom: 0,
             } }
             pb={ 3 }
             px={ 2 }
             justifyContent={ { xs: 'space-between' } }
             alignItems='center'
-            overflow={hidden}
+            overflow='hidden'
           >
-
+            
         </Typography>
           <Box
           sx={ {
@@ -194,7 +194,8 @@ const SingleChat = ( { fetchAgain, setFetchAgain, toastOptions } ) => {
               onKeyDown={sendMessage}
               id="first-name"
               isRequired
-              mt={3}
+              mt={ 3 }
+              
             >
               {istyping ? (
                
@@ -212,7 +213,8 @@ const SingleChat = ( { fetchAgain, setFetchAgain, toastOptions } ) => {
                 bg="#E0E0E0"
                 placeholder="Enter a message.."
                 value={newMessage}
-                onChange={typingHandler}
+                onChange={ typingHandler }
+                sx={{ width:'400px'}}
               />
             </FormControl>
         </Box>  
