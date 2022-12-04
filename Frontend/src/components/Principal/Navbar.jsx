@@ -97,6 +97,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     setAnchorEl(null);
     handleMobileMenuClose();
   };
+  const handlerProfile = () => {
+    setAnchorEl(null);
+    handleMobileMenuClose();
+  };
  
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -116,7 +120,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
       onClose={handleMenuClose}
     >
       
-        <MenuItem onClick={<ProfileInfo /> }>My account</MenuItem>
+        <MenuItem onClick={handlerProfile}>My account</MenuItem>
       
       <MenuItem onClick={ logout}>Logout</MenuItem>
     </Menu>
@@ -208,8 +212,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   } ) );
    
    const accessChat = async (userId) => {
-    console.log(userId);
-
+      console.log('salut');
     try {
       setLoadingChat(true);
       const config = {
@@ -221,7 +224,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
       const { data } = await axios.post(`https://mernchat-rtv3.onrender.com/api/chat`, { userId }, config);
 
       if (!chats.find((c) => c._id === data._id)) setChats([data, ...chats]);
-      setSelectedChat(data);
+      setSelectedChat( data );
+      console.log(data);
       setLoadingChat(false);
       onClose();
     } catch (error) {

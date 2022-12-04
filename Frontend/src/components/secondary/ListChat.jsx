@@ -50,7 +50,8 @@ const ListChat = ( {fetchAgain, toastOptions } ) => {
         backgroundColor: 'white',
         width: { xs: '100%', sm: '30%' },
         borderRadius: '10px',
-        border:'1px solid gray'
+        border: '1px solid gray',
+        minHeight:'30rem'
       } }
 
       flex={ 4 }>
@@ -85,8 +86,8 @@ const ListChat = ( {fetchAgain, toastOptions } ) => {
           alignItems: 'center',
           backgroundColor: '#F8F8F8',
           borderRadius: '10px',
-          width: '100%',
-          height: '100%',
+          width: '80%',
+          // height: '100%',
           overflow:'hidden'
         } }
         p={3}
