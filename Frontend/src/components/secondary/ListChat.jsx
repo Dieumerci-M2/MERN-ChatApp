@@ -111,6 +111,7 @@ const ListChat = ( {fetchAgain, toastOptions } ) => {
                 key={chat._id}
               >
                 <Typography>
+                  console.log(chat)
                   {!chat.isGroupChat
                     ? getSender(loggedUser, chat.users)
                     : chat.chatName}

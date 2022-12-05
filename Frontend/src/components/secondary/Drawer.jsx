@@ -12,10 +12,11 @@ import UserListItem from '../useAvatar/UserListItem';
 
 const style = {
   position: 'absolute',
-  top: '20%',
-  left: '10%',
+  top: '25%',
+  left: '9%',
   transform: 'translate(-50%, -50%)',
-  width: 250,
+  width: 230,
+  height: 150,
   bgcolor: 'background.paper',
   boxShadow: 32,
   p: 2,
