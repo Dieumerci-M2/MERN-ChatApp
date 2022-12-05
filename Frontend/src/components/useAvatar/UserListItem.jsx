@@ -1,11 +1,11 @@
 import React from 'react'
 import {Box, Avatar, Typography, ListItemAvatar} from '@mui/material'
 
-const UserListItem = ({user, handlerFunction}) => {
+const UserListItem = ({user, handleFunction}) => {
      
   return (
        <Box
-          onClick={ handlerFunction }
+          onClick={ handleFunction }
           sx={ {
             cursor: 'pointer',
             backgroundColor: '#E8E8E8',

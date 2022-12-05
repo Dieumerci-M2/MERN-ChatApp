@@ -91,8 +91,9 @@ export default function Drawer({toastOptions, user, accessChat, loadingChat}) {
                   />
               ))
             ) }
-          { loadingChat && (
+          { (
             <Backdrop
+              open={loadingChat}
               sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
               >
             <CircularProgress color="inherit" />
