@@ -18,7 +18,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { ChatContext } from '../../Context/Context';
 import Drawer from '../secondary/Drawer'
-import ListChat from '../secondary/ListChat';
+import {toast} from 'react-toastify'
 import ProfileInfo from '../secondary/ProfileInfo';
 
 import { useNavigate} from 'react-router-dom'
