@@ -15,7 +15,7 @@ const ListChat = ( {fetchAgain, toastOptions } ) => {
   const [ loggedUser, setLoggedUser ] = useState()
   
   const fetchChats = async () => {
-     console.log(user);
+     
     try {
       const config = {
         headers: {
@@ -25,7 +25,7 @@ const ListChat = ( {fetchAgain, toastOptions } ) => {
 
       const { data } = await axios.get("https://mernchat-rtv3.onrender.com/api/chat", config);
       setChats( data );
-      console.log(data);
+      console.log(chats);
     } catch (error) {
       toast.error( `Failed to load the chats`, toastOptions );
       console.log(error.message);
@@ -110,11 +110,14 @@ const ListChat = ( {fetchAgain, toastOptions } ) => {
                 
                 key={chat._id}
               >
+                
                 <Typography>
-                  console.log(chat)
+                
                   {!chat.isGroupChat
-                    ? getSender(loggedUser, chat.users)
-                    : chat.chatName}
+                    ? chat.users_id
+                    : chat.chatName
+                   
+                  }
                 </Typography>
                 {chat.latestMessage && (
                   <Typography fontSize="xs">

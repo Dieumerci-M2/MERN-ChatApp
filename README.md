@@ -1,7 +1,7 @@
-### MERN-ChatApp
+# MERN-ChatApp
 <hr/>
 
-# This application will help us to get started with a MERN-Stack project by applying all that we have learned so far... 
+### This application will help us to get started with a MERN-Stack project by applying all that we have learned so far... 
 
 ## How to initialize pnpm?
 
