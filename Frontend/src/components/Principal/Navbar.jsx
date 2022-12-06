@@ -225,7 +225,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
       if (!chats.find((c) => c._id === data._id)) setChats([data, ...chats]);
       setSelectedChat( data );
-      console.log(data);
+     
       setLoadingChat(false);
       onClose();
     } catch (error) {
@@ -236,7 +236,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
    return (
     <>
     <Box sx={{ flexGrow: 1, color:'#37474f'}} >
-      <AppBar position="static" sx={{backgroundColor:'#37474f'}}>
+      <AppBar position="sticky" sx={{backgroundColor:'#37474f'}}>
         <Toolbar>
           <IconButton
             size="large"
@@ -275,7 +275,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-              <Badge badgeContent={4} color="error">
+              <Badge badgeContent={1} color="error">
                 <MailIcon />
               </Badge>
             </IconButton>
@@ -284,7 +284,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
               aria-label="show 17 new notifications"
               color="inherit"
             >
-              <Badge badgeContent={17} color="error">
+              <Badge badgeContent={1} color="error">
                 <NotificationsIcon />
               </Badge>
             </IconButton>

@@ -7,8 +7,7 @@ import Navbar from '../components/Principal/Navbar'
 import { Box, createTheme, Stack } from '@mui/material'
 import AddPost from '../components/secondary/AddPost'
 import { ThemeProvider } from '@emotion/react';
-import { useNavigate } from 'react-router-dom'
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ChatContext } from '../Context/Context';
 
@@ -34,11 +33,11 @@ const Dashboard = () => {
       <Box bgcolor={'#f5f5f5'} color={'text.primary'}>
         { user && <Navbar toastOptions={ toastOptions} /> }
       <Stack direction='row' spacing={2} sx={{justifyContent:'space-between'}}>
-          { user && <Sidebar setMode={ setMode } mode={ mode } /> }
+          {/* { user && <Sidebar setMode={ setMode } mode={ mode } /> } */}
           { user && <Feed toastOptions={ toastOptions } /> }
-          { user && <Rightbar /> }
+          {/* { user && <Rightbar /> } */}
       </Stack>
-        <AddPost />
+        {/* <AddPost /> */}
         <ToastContainer />
       </Box>
   </ThemeProvider> 

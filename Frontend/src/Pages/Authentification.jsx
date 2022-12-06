@@ -3,7 +3,7 @@ import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate} from 'react-router-dom'
-import { Stack, Button, TextField, Container, InputAdornment, Box, Tabs, Tab, Typography, Alert, Snackbar} from '@mui/material'
+import { Stack, Button, TextField, Container, InputAdornment, Box, Tabs, Tab, Typography} from '@mui/material'
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
@@ -55,7 +55,8 @@ const Authentification = () => {
         mode : 'cors'
        }
       
-      const { data } = await axios.post( "https://mernchat-rtv3.onrender.com/api/user/login", { email: LogEmail, password: LogPassword }, config )
+      const { data } = await axios.post( "https://mernchat-rtv3.onrender.com/api/user/login",
+        { email: LogEmail, password: LogPassword }, config )
       
        toast.success( 'registration successful', toastOptions )
       
@@ -141,10 +142,19 @@ const Authentification = () => {
     }
   }
   return (
-    <Container maxWidth="sm" bgcolor={'#f5f5f5'}>
-      <Stack spacing={ 2 } mt={ 15 } sx={ { backgroundColor: 'initial', borderRadius: '10px', border:'1px solid #cfd8dc' } }>
-        <Box sx={{ borderBottom: 1, borderColor: '#cfd8dc' }}>
-          <Tabs value={value} onChange={changeTabs} aria-label="basic tabs example" >
+    <Container
+      maxWidth="sm"
+      bgcolor={ '#f5f5f5' }>
+      <Stack
+        spacing={ 2 }
+        mt={ 15 }
+        sx={ { backgroundColor: 'initial', borderRadius: '10px', border: '1px solid #cfd8dc' } }>
+        <Box
+          sx={ { borderBottom: 1, borderColor: '#cfd8dc' } }>
+          <Tabs
+            value={ value }
+            onChange={ changeTabs }
+            aria-label="basic tabs example" >
             <Tab label="Login" />
             <Tab label="Sign-Up" />
           </Tabs>
@@ -152,26 +162,138 @@ const Authentification = () => {
         <Box sx={{ padding: 2 , color:'white'}}>
           {value === 0 && (
           <Stack spacing={ 2 }>
-            <TextField label='Email' variant='outlined' size='small' type='mail' required={true} onChange={(e)=> setLogEmail(e.target.value)} sx={{color:'white', border:'1px solid white', borderRadius:'5px'}}></TextField>
-            <TextField label='Password' variant='outlined' size='small' type={hiden ? 'password': ''} sx={{color:'white', border:'1px solid white', borderRadius:'5px'}} required={ true } onChange={ ( e ) => setLogPassword(e.target.value)} InputProps={{endAdornment: <InputAdornment position='end'><Button  onClick={handlePassword} endIcon={hiden ? <VisibilityOffIcon/> : <VisibilityIcon/>}></Button></InputAdornment>}}></TextField>
-            <Button variant='contained' onClick={ConnectHandler}>Connexion</Button>
-            <Button variant='text' sx={{color:'white'}} >forgoted password</Button>
+              <TextField
+                label='Email'
+                variant='outlined'
+                size='small' type='mail'
+                required={ true }
+                onChange={ ( e ) => setLogEmail( e.target.value ) }
+                sx={ { color: 'white', border: '1px solid white', borderRadius: '5px' } }>
+                
+              </TextField>
+              <TextField
+                label='Password'
+                variant='outlined' size='small'
+                type={ hiden ? 'password' : '' }
+                sx={ { color: 'white', border: '1px solid white', borderRadius: '5px' } }
+                required={ true }
+                onChange={ ( e ) => setLogPassword( e.target.value ) }
+                InputProps={ {
+                  endAdornment:
+                    <InputAdornment
+                      position='end'
+                    >
+                      <Button
+                        onClick={ handlePassword }
+                        endIcon={ hiden ? <VisibilityOffIcon /> : <VisibilityIcon /> }
+                      >
+                      </Button>
+                    </InputAdornment>
+                } }
+              >
+
+            </TextField>
+              <Button
+                variant='contained'
+                onClick={ ConnectHandler }
+              >
+                Connexion
+              </Button>
+              <Button
+                variant='text'
+                sx={ { color: 'white' } }
+              >
+                forgoted password
+              </Button>
           </Stack>
           )}
           {value === 1 && (
             <Stack> 
               <Stack spacing={ 2 }>
-                <TextField label='Name' variant='outlined' size='small' type='name' required={true} onChange={(e)=> setSignName(e.target.value)}></TextField>
-                <TextField label='Email' variant='outlined' size='small' type='mail' required={true} onChange={(e)=> setSignEmail(e.target.value)}></TextField>
-                <TextField label='Password' variant='outlined' size='small' type={hiden ? 'password': ''} required={ true } onChange={ ( e ) => setSignPassword(e.target.value) } InputProps={ { endAdornment: <InputAdornment position='end'><Button variant='text' onClick={handlePassword} endIcon={ hiden ? <VisibilityOffIcon/> : <VisibilityIcon/> }></Button></InputAdornment> } }></TextField>
-                  <TextField label='Confirm Password' variant='outlined' size='small' type={hiden ? 'password': ''} required={true} onChange={(e)=> setSignConfirmPassword(e.target.value)} InputProps={ { endAdornment: <InputAdornment position='end'><Button variant='text' onClick={handlePassword} endIcon={ hiden ? <VisibilityOffIcon/> : <VisibilityIcon/>}></Button></InputAdornment> } }></TextField>
+                <TextField
+                  label='Name'
+                  variant='outlined'
+                  size='small'
+                  type='name'
+                  required={ true }
+                  onChange={ ( e ) => setSignName( e.target.value ) }>  
+                </TextField>
+                <TextField
+                  label='Email'
+                  variant='outlined'
+                  size='small' type='mail'
+                  required={ true } onChange={ ( e ) => setSignEmail( e.target.value ) }>
+                  
+                </TextField>
+                <TextField
+                  label='Password'
+                  variant='outlined'
+                  size='small'
+                  type={ hiden ? 'password' : '' }
+                  required={ true }
+                  onChange={ ( e ) => setSignPassword( e.target.value ) }
+                  InputProps={ {
+                    endAdornment: <InputAdornment position='end'>
+                      <Button
+                        variant='text'
+                        onClick={ handlePassword }
+                        endIcon={ hiden ? <VisibilityOffIcon /> : <VisibilityIcon /> }>
+                      </Button>
+                    </InputAdornment>
+                  } }
+                >
+
+                </TextField>
+                <TextField
+                  label='Confirm Password'
+                  variant='outlined'
+                  size='small'
+                  type={ hiden ? 'password' : '' }
+                  required={ true }
+                  onChange={ ( e ) => setSignConfirmPassword( e.target.value ) }
+                  InputProps={ {
+                    endAdornment: <InputAdornment position='end'>
+                      <Button
+                        variant='text'
+                        onClick={ handlePassword }
+                        endIcon={ hiden ? <VisibilityOffIcon /> : <VisibilityIcon /> }>
+                      </Button>
+                    </InputAdornment>
+                  } }
+                >
+
+                </TextField>
               </Stack>
               <Stack id='pic' mt= {2} mb= {2}>
-                <Typography variant="body1" color="initial">Upload your Picture</Typography>
-                <Stack direction = 'row' spacing={ 2 } mt= {2} mb= {2}>
-                  <TextField variant='outlined' size='small' type='file' p={1.5} accept='image/*' onChange={(e)=> postDetails(e.target.files[0])}></TextField>
+                <Typography
+                  variant="body1"
+                  color="initial"
+                >
+                  Upload your Picture
+                </Typography>
+                <Stack
+                  direction='row'
+                  spacing={ 2 }
+                  mt={ 2 }
+                  mb={ 2 }>
+                  <TextField
+                    variant='outlined'
+                    size='small'
+                    type='file'
+                    p={ 1.5 } accept='image/*'
+                    onChange={ ( e ) => postDetails( e.target.files[ 0 ] ) }
+                  >
+
+                  </TextField>
                 </Stack>
-                <Button variant='contained' mt={2} isloading={upload ? 'loadind' : 'fetch'} onClick={submitHandler} >Create an account</Button>
+                <Button
+                  variant='contained'
+                  mt={ 2 }
+                  isloading={ upload ? 'loadind' : 'fetch' }
+                  onClick={ submitHandler }
+                >
+                  Create an account
+                </Button>
               </Stack>
           </Stack>
           )}
