@@ -236,7 +236,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
    return (
     <>
     <Box sx={{ flexGrow: 1, color:'#37474f'}} >
-      <AppBar position="sticky" sx={{backgroundColor:'#37474f'}}>
+      <AppBar position="fixed" sx={{backgroundColor:'#37474f'}}>
         <Toolbar>
           <IconButton
             size="large"

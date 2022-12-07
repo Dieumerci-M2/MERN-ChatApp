@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react'
 import './style.css'
 import { toast } from 'react-toastify'
 import { ChatContext } from '../../Context/Context'
-import { Box, TextField, Typography, Skeleton, FormControl} from '@mui/material'
+import { Box, TextField, Typography, FormControl} from '@mui/material'
 import ChatScrollable from './ChatScrollable'
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -10,6 +10,7 @@ import Lottie from 'react-lottie'
 import animationData from "../Animation/Lottie.json";
 
 import io from "socket.io-client";
+import axios from 'axios'
 
 const ENDPOINT = 'https://mernchat-rtv3.onrender.com' 
 let socket, selectedChatCompare
@@ -23,7 +24,6 @@ const SingleChat = ( { fetchAgain, setFetchAgain, toastOptions } ) => {
   const [socketConnected, setSocketConnected] = useState(false);
   const [typing, setTyping] = useState(false);
   const [ istyping, setIsTyping ] = useState( false );
-  const [ open, setOpen ] = useState( false );
   
   const handleOpen = () => {
     setOpen(true);
@@ -40,7 +40,7 @@ const SingleChat = ( { fetchAgain, setFetchAgain, toastOptions } ) => {
   
     const fetchMessages = async () => {
      if (!selectedChat) return;
-
+      console.log(selectedChat)
     try {
       const config = {
         headers: {
@@ -50,12 +50,16 @@ const SingleChat = ( { fetchAgain, setFetchAgain, toastOptions } ) => {
 
       setLoading(true);
 
-      const { data } = await axios.get(
+      const response  = await axios.get(
         `https://mernchat-rtv3.onrender.com/api/message/${selectedChat._id}`,
         config
       );
+
+      const { data } = response
+      
       setMessages(data);
-      setLoading(false);
+      setLoading( false );
+      
 
       socket.emit("join chat", selectedChat._id);
     } catch (error) {
@@ -153,7 +157,7 @@ const SingleChat = ( { fetchAgain, setFetchAgain, toastOptions } ) => {
               position: 'absolute',
               bottom: 0,
             } }
-            pb={ 3 }
+            pb={ 2 }
             px={ 2 }
             justifyContent={ { xs: 'space-between' } }
             alignItems='center'
@@ -168,7 +172,7 @@ const SingleChat = ( { fetchAgain, setFetchAgain, toastOptions } ) => {
           height: '100%',
           borderRadius:'5px'
           } }
-          p={ 3 }
+          p={ 2 }
           justifyContent='flex-end'
           >
             {
@@ -177,7 +181,7 @@ const SingleChat = ( { fetchAgain, setFetchAgain, toastOptions } ) => {
 
           <Backdrop
             sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-            open={open}
+            open={loading}
             onClick={handleOpen}
           >
             <CircularProgress color="inherit" />
@@ -193,7 +197,7 @@ const SingleChat = ( { fetchAgain, setFetchAgain, toastOptions } ) => {
              <FormControl
               onKeyDown={sendMessage}
               id="first-name"
-              isRequired
+              isrequired
               mt={ 3 }
               
             >
@@ -214,7 +218,7 @@ const SingleChat = ( { fetchAgain, setFetchAgain, toastOptions } ) => {
                 placeholder="Enter a message.."
                 value={newMessage}
                 onChange={ typingHandler }
-                sx={{ width:'400px'}}
+                sx={{ width:'400px' ,position:'absolute', top:0, left:0}}
               />
             </FormControl>
         </Box>  
@@ -223,7 +227,7 @@ const SingleChat = ( { fetchAgain, setFetchAgain, toastOptions } ) => {
       ) : (
           
           <Box d="flex" alignItems="center" justifyContent="center" h="100%">
-            <Typography fontSize="20px" pb={3} justifyContent='center' >
+            <Typography fontSize="20px" pb={8} justifyContent='center' >
               Click on a user to start chatting
             </Typography>
           </Box>

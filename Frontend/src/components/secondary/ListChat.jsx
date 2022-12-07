@@ -24,7 +24,7 @@ const ListChat = ( {fetchAgain, toastOptions } ) => {
       
       const { data } = response;
       setChats( data );
-      console.log(response);
+      //console.log(response);
     } catch (error) {
       toast.error( `Failed to load the chats`, toastOptions );
       console.log(error.message);
@@ -76,8 +76,6 @@ const ListChat = ( {fetchAgain, toastOptions } ) => {
           backgroundColor: '#F8F8F8',
           borderRadius: '10px',
           width: '80%',
-          
-          // height: '100%',
           overflow:'hidden'
         } }
         p={3}
@@ -113,7 +111,7 @@ const ListChat = ( {fetchAgain, toastOptions } ) => {
                   <Typography fontSize="xs">
                     <b>{chat.latestMessage.sender.name} : </b>
                     {chat.latestMessage.content.length > 50
-                      ? chat.latestMessage.content.substring(0, 51) + "..."
+                      ? chat.latestMessage.content.substring(0, 20) + "..."
                       : chat.latestMessage.content}
                   </Typography>
                 )}
