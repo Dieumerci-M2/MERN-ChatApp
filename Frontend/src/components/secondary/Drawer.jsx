@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import { Stack, TextField, Backdrop, CircularProgress} from '@mui/material';
+import { Stack, TextField, Backdrop, CircularProgress, FormControl} from '@mui/material';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import ChatLoading from '../useAvatar/ChatLoading';
@@ -46,8 +46,8 @@ export default function Drawer({toastOptions, user, accessChat, loadingChat}) {
         },
       }
     
-      const { data } = await axios.get( `https://mernchat-rtv3.onrender.com/api/user?search=${ search }`, config )
-
+      const reponse  = await axios.get( `https://mernchat-rtv3.onrender.com/api/user?search=${ search }`, config )
+      const {data} = reponse
       setLoading(false)
       setSearchResult( data )
       
@@ -69,14 +69,18 @@ export default function Drawer({toastOptions, user, accessChat, loadingChat}) {
           <Typography id="modal-modal-title" variant="h6" component="h2" >
             Search User
           </Typography>
-          <Stack direction='row' mt={2}>
-            <TextField
+          <Stack direction='row' mt={ 2 }>
+            <FormControl
+              onKeyDown={ onclickHandler }
+            >
+              <TextField
               id="outlined-basic"
               label="Search name or email"
               variant="outlined"
               value={ search }
               onChange={(e)=> setSearch(e.target.value)}
             />
+            </FormControl> 
             <Button variant='white' onClick={onclickHandler}>Go</Button>
           </Stack> 
          

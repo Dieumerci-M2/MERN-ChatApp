@@ -83,17 +83,21 @@ const ListChat = ( {fetchAgain, toastOptions } ) => {
         
           <Stack
           sx={ { overflow: 'scroll' } }
-          spacing={2}
+          spacing={ 2 }
           >
             {chats.map((chat) => (
               <Box
                 onClick={() => setSelectedChat(chat)}
                 cursor="pointer"
-                bgcolor={selectedChat === chat ? "#38B2AC" : "#E8E8E8"}
+                bgcolor={selectedChat === chat ? "#7986cb" : "#E8E8E8"}
                 color={selectedChat === chat ? "white" : "black"}
                 p={1}
                 sx={ {
-                  borderRadius: "10px"
+                  borderRadius: "10px",
+                  cursor: 'pointer',
+                  '&:hover': {
+                      backgroundColor: "#bbdefb",
+                     },
                 }}
                 
                 key={chat._id}

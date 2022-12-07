@@ -113,8 +113,7 @@ const SingleChat = ( { fetchAgain, setFetchAgain, toastOptions } ) => {
    useEffect(() => {
     socket.on("message recieved", (newMessageRecieved) => {
       if (
-        !selectedChatCompare || // if chat is not selected or doesn't match current chat
-        selectedChatCompare._id !== newMessageRecieved.chat._id
+        !selectedChatCompare || selectedChatCompare._id !== newMessageRecieved.chat._id
       ) {
         if (!notification.includes(newMessageRecieved)) {
           setNotification([newMessageRecieved, ...notification]);
@@ -154,8 +153,7 @@ const SingleChat = ( { fetchAgain, setFetchAgain, toastOptions } ) => {
           <Typography
             sx={ {
               display: { xs: '25px', md: '30px' },
-              position: 'absolute',
-              bottom: 0,
+              
             } }
             pb={ 2 }
             px={ 2 }
@@ -167,7 +165,6 @@ const SingleChat = ( { fetchAgain, setFetchAgain, toastOptions } ) => {
         </Typography>
           <Box
           sx={ {
-          backgroundColor: '#E8E8E8',
           width: '100%',
           height: '100%',
           borderRadius:'5px'
@@ -194,12 +191,11 @@ const SingleChat = ( { fetchAgain, setFetchAgain, toastOptions } ) => {
                   </div>
                 ) }
             
-             <FormControl
-              onKeyDown={sendMessage}
+          </Box>  
+          <FormControl
+              onKeyDown={ sendMessage }
               id="first-name"
               isrequired
-              mt={ 3 }
-              
             >
               {istyping ? (
                
@@ -213,21 +209,22 @@ const SingleChat = ( { fetchAgain, setFetchAgain, toastOptions } ) => {
                 <></>
               )}
               <TextField
-                variant="filled"
+                variant="outlined"
                 bg="#E0E0E0"
+                mt={2}
                 placeholder="Enter a message.."
                 value={newMessage}
                 onChange={ typingHandler }
-                sx={{ width:'400px' ,position:'absolute', top:0, left:0}}
+                sx={ { width: { xs : '300px', md:'400px'} } }
+                
               />
             </FormControl>
-        </Box>  
       </>
 
       ) : (
           
           <Box d="flex" alignItems="center" justifyContent="center" h="100%">
-            <Typography fontSize="20px" pb={8} justifyContent='center' >
+            <Typography fontSize="20px" justifyContent='center' >
               Click on a user to start chatting
             </Typography>
           </Box>
