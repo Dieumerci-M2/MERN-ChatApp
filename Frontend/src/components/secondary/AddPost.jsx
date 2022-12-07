@@ -49,13 +49,31 @@ const AddPost = () => {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-        <Box width={400} height={280} bgcolor={'background.default'} color={'text.primary'} p={3} borderRadius={5}>
-          <Typography variant='h6' color='gray' textAlign='center'>Create a Post</Typography>
+        <Box
+          width={ 400 }
+          height={ 280 }
+          bgcolor={ 'background.default' }
+          color={ 'text.primary' }
+          p={ 3 }
+          borderRadius={ 5 }>
+          <Typography
+            variant='h6'
+            color='gray'
+            textAlign='center'
+          >
+            Create a Post
+          </Typography>
           <UserBox>
-            <Avatar alt="Remy Sharp" src="../src/assets/a.jpg"
+            <Avatar
+              alt="Remy Sharp"
+              src="../src/assets/a.jpg"
             sx={{width:30, height:30}}
             />
-            <Typography fontWeight={500} >Dieme Md</Typography>
+            <Typography
+              fontWeight={ 500 }
+            >
+              Dieme Md
+            </Typography>
           </UserBox>
           <TextField
             sx={{width:'100%'}}
@@ -65,7 +83,11 @@ const AddPost = () => {
             placeholder="What's on your mind?"
             variant='standard'
           />
-          <Stack direction='row' spacing={1} mt={2} mb={3}>
+          <Stack
+            direction='row'
+            spacing={ 1 }
+            mt={ 2 }
+            mb={ 3 }>
             <EmojiEmotionsIcon color='info'/>
             <InsertPhotoIcon color='error'/>
             < MicOffIcon color='success' />

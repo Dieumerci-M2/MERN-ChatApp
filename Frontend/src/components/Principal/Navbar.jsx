@@ -80,7 +80,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
    const isMobileMenuOpen = Boolean( mobileMoreAnchorEl );
   
    const logout = () => {
-     localStorage.removeItem( 'infoUser' )
+     localStorage.removeItem( 'InfoUser' )
      navigate('/')
   }
     

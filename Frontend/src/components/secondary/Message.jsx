@@ -24,7 +24,7 @@ const Message = ({ fetchAgain, setFetchAgain, toastOptions }) => {
         border: '1px solid gray'
         
       } } 
-      p={ 3 }
+      p={ 1 }
       flex={4}
     >
       <SingleChat
