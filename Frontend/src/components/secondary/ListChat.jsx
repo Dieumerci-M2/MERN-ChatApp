@@ -35,7 +35,8 @@ const ListChat = ( {fetchAgain, toastOptions } ) => {
     setLoggedUser(JSON.parse(localStorage.getItem("infoUser")));
     fetchChats();
     
-  }, [fetchAgain])
+   }, [ fetchAgain ] )
+
   return (
     <Box
       sx={ {
@@ -105,15 +106,18 @@ const ListChat = ( {fetchAgain, toastOptions } ) => {
                 
                 <Typography>
                 
-                  {
+                  <b>
+                    {
+                    !chat.isGroupChat ?  
+                    chat.users[ 0 ].nom
+                        : chat.chatName 
                     
-                    chat.chatName
-                   
-                  }
+                    }
+                  </b>
                 </Typography>
                 {chat.latestMessage && (
                   <Typography fontSize="xs">
-                    <b>{chat.latestMessage.sender.name} : </b>
+                    <b>{chat.latestMessage.sender.name}</b>
                     {chat.latestMessage.content.length > 50
                       ? chat.latestMessage.content.substring(0, 20) + "..."
                       : chat.latestMessage.content}

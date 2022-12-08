@@ -19,7 +19,7 @@ const ChatScrollable = ( { messages } ) => {
           <div style={{ display: "flex" }} key={m._id}>
             {(isSameSender(messages, m, i, user._id) ||
               isLastMessage(messages, i, user._id)) && (
-              <Tooltip title={m.sender.name} placement="bottom-end" hasArrow>
+              <Tooltip title={m.sender.name} placement="bottom-end" >
                 <Avatar
                   mt={4}
                   mr={1}

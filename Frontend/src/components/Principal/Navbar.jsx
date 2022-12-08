@@ -274,21 +274,15 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
              </Stack>
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit">
+              <IconButton
+                 size="large"
+                 aria-label="show new mails"
+                 color="inherit">
               <Badge badgeContent={1} color="error">
                 <MailIcon />
               </Badge>
             </IconButton>
-            <IconButton
-              size="large"
-              aria-label="show 17 new notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={1} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-           <IconButton onClick={ handleOpenUserMenu } sx={ { p: 0 } }>
+           <IconButton onClick={ handleOpenUserMenu } sx={ { p: 0, marginLeft:'20px' } }>
                 <StyledBadge
                   overlap="circular"
                   anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}

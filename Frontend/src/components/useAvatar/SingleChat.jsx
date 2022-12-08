@@ -25,9 +25,6 @@ const SingleChat = ( { fetchAgain, setFetchAgain, toastOptions } ) => {
   const [typing, setTyping] = useState(false);
   const [ istyping, setIsTyping ] = useState( false );
   
-  const handleOpen = () => {
-    setOpen(true);
-  };
 
     const defaultOptions = {
     loop: true,
@@ -179,7 +176,6 @@ const SingleChat = ( { fetchAgain, setFetchAgain, toastOptions } ) => {
           <Backdrop
             sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
             open={loading}
-            onClick={handleOpen}
           >
             <CircularProgress color="inherit" />
           </Backdrop>
