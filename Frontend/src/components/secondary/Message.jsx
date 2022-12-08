@@ -15,7 +15,7 @@ const Message = ({ fetchAgain, setFetchAgain, toastOptions }) => {
           xs: setSelectedChat ? 'flex':'none',
           sm: 'flex',
           width: { xs: '100%', sm: '30%' },
-          minHeight:'30rem'
+          
         },
         flexDirection: 'column',
         alignItems: 'center',
@@ -24,7 +24,7 @@ const Message = ({ fetchAgain, setFetchAgain, toastOptions }) => {
         border: '1px solid gray'
         
       } } 
-      p={ 3 }
+      p={ 1 }
       flex={4}
     >
       <SingleChat

@@ -1,13 +1,10 @@
 import React,{ useContext, useEffect, useState} from 'react'
 import Typography from '@mui/material/Typography';
 import axios from 'axios'
-import { Box, Button , Stack } from '@mui/material';
+import { Box, Stack } from '@mui/material';
 import { ChatContext } from '../../Context/Context';
 import { toast } from 'react-toastify';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import ChatLoading from '../useAvatar/ChatLoading';
-import { getSender } from '../config/LogicOfChat';
-import NewGroupChat from './NewGroupChat';
+
 
 const ListChat = ( {fetchAgain, toastOptions } ) => {
 
@@ -23,9 +20,11 @@ const ListChat = ( {fetchAgain, toastOptions } ) => {
         },
       };
 
-      const { data } = await axios.get("https://mernchat-rtv3.onrender.com/api/chat", config);
+      const response = await axios.get("https://mernchat-rtv3.onrender.com/api/chat", config);
+      
+      const { data } = response;
       setChats( data );
-      console.log(chats);
+      //console.log(response);
     } catch (error) {
       toast.error( `Failed to load the chats`, toastOptions );
       console.log(error.message);
@@ -36,7 +35,8 @@ const ListChat = ( {fetchAgain, toastOptions } ) => {
     setLoggedUser(JSON.parse(localStorage.getItem("infoUser")));
     fetchChats();
     
-  }, [fetchAgain])
+   }, [ fetchAgain ] )
+
   return (
     <Box
       sx={ {
@@ -68,18 +68,8 @@ const ListChat = ( {fetchAgain, toastOptions } ) => {
       >
         My Chats
       </Box>
-      <NewGroupChat>
-      <Button
-        variant='contained'
-        
-        sx={ {
-          fontSize: { xs: '17px', md: '10px', lg: '17px' },
-          backgroundColor:'#aebfbe'
-        } }
-        endIcon={<AddCircleOutlineIcon />}
-        >New Group Chat
-      </Button>
-      </NewGroupChat>
+      
+    
       <Box
         sx={ {
           flexDirection: 'column',
@@ -87,25 +77,28 @@ const ListChat = ( {fetchAgain, toastOptions } ) => {
           backgroundColor: '#F8F8F8',
           borderRadius: '10px',
           width: '80%',
-          // height: '100%',
           overflow:'hidden'
         } }
         p={3}
       >
-        {chats ? (
+        
           <Stack
-            sx={{overflow: 'scroll'}}
+          sx={ { overflow: 'scroll' } }
+          spacing={ 2 }
           >
             {chats.map((chat) => (
               <Box
                 onClick={() => setSelectedChat(chat)}
                 cursor="pointer"
-                bgColor={selectedChat === chat ? "#38B2AC" : "#E8E8E8"}
+                bgcolor={selectedChat === chat ? "#7986cb" : "#E8E8E8"}
                 color={selectedChat === chat ? "white" : "black"}
-                px={3}
-                py={ 2 }
+                p={1}
                 sx={ {
-                  borderRadius: "10px"
+                  borderRadius: "10px",
+                  cursor: 'pointer',
+                  '&:hover': {
+                      backgroundColor: "#bbdefb",
+                     },
                 }}
                 
                 key={chat._id}
@@ -113,26 +106,26 @@ const ListChat = ( {fetchAgain, toastOptions } ) => {
                 
                 <Typography>
                 
-                  {!chat.isGroupChat
-                    ? chat.users_id
-                    : chat.chatName
-                   
-                  }
+                  <b>
+                    {
+                    !chat.isGroupChat ?  
+                    chat.users[ 0 ].nom
+                        : chat.chatName 
+                    
+                    }
+                  </b>
                 </Typography>
                 {chat.latestMessage && (
                   <Typography fontSize="xs">
-                    <b>{chat.latestMessage.sender.name} : </b>
+                    <b>{chat.latestMessage.sender.name}</b>
                     {chat.latestMessage.content.length > 50
-                      ? chat.latestMessage.content.substring(0, 51) + "..."
+                      ? chat.latestMessage.content.substring(0, 20) + "..."
                       : chat.latestMessage.content}
                   </Typography>
                 )}
               </Box>
             ))}
           </Stack>
-        ) : (
-          <Typography  m={3}>loading...</Typography>// <ChatLoading />
-        )}
       </Box>
     </Box>
   );
