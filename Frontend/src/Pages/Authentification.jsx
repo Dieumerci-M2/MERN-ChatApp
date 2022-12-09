@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState} from 'react'
 import axios from 'axios'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -21,12 +21,6 @@ const Authentification = () => {
   
   const navigateTo = useNavigate()
 
-  useEffect( () => {
-    const userInfo = JSON.parse( localStorage.getItem( 'infoUser' ) )
-    if ( userInfo ) {
-      navigateTo('/chats')
-    }
-  },[navigateTo])
   
   const toastOptions = {
     position: "bottom-right",
@@ -54,14 +48,15 @@ const Authentification = () => {
         },
         mode : 'cors'
        }
-      
-      const { data } = await axios.post( "https://mernchat-rtv3.onrender.com/api/user/login",
+    
+      const { data } = await axios.post( "http://localhost:6600/api/user/login",
         { email: LogEmail, password: LogPassword }, config )
       
        toast.success( 'registration successful', toastOptions )
       
       localStorage.setItem( 'InfoUser', JSON.stringify(data))
-      navigateTo( '/chats' )
+      navigateTo('/chats')
+      
       setUpload(false)
 
       
@@ -92,7 +87,7 @@ const Authentification = () => {
         mode : 'cors'
       }
   
-      const data  = await (fetch( 'https://mernchat-rtv3.onrender.com/api/user', {
+      const data  = await (fetch( 'http://localhost:6600/api/user', {
         method: 'POST',
         ...config,
         body: new URLSearchParams( { nom : SignName, email : SignEmail, password : SignPassword})

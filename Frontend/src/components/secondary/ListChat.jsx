@@ -9,22 +9,23 @@ import { toast } from 'react-toastify';
 const ListChat = ( {fetchAgain, toastOptions } ) => {
 
   const { user, setSelectedChat,selectedChat, chats, setChats } = useContext( ChatContext )
-  const [ loggedUser, setLoggedUser ] = useState()
+  
   
   const fetchChats = async () => {
      
     try {
+    
       const config = {
         headers: {
           Authorization: `Bearer ${user.token}`,
         },
       };
 
-      const response = await axios.get("https://mernchat-rtv3.onrender.com/api/chat", config);
+      const response = await axios.get("http://localhost:6600/api/chat", config);
       
       const { data } = response;
       setChats( data );
-      //console.log(response);
+      console.log(response);
     } catch (error) {
       toast.error( `Failed to load the chats`, toastOptions );
       console.log(error.message);
@@ -32,7 +33,7 @@ const ListChat = ( {fetchAgain, toastOptions } ) => {
   };
 
    useEffect(() => {
-    setLoggedUser(JSON.parse(localStorage.getItem("infoUser")));
+    
     fetchChats();
     
    }, [ fetchAgain ] )
@@ -109,7 +110,7 @@ const ListChat = ( {fetchAgain, toastOptions } ) => {
                   <b>
                     {
                     !chat.isGroupChat ?  
-                    chat.users[ 0 ].nom
+                    chat.users[ 0 ].name
                         : chat.chatName 
                     
                     }

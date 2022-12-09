@@ -12,7 +12,7 @@ import animationData from "../Animation/Lottie.json";
 import io from "socket.io-client";
 import axios from 'axios'
 
-const ENDPOINT = 'https://mernchat-rtv3.onrender.com' 
+const ENDPOINT = 'http://localhost:6600' 
 let socket, selectedChatCompare
 
 const SingleChat = ( { fetchAgain, setFetchAgain, toastOptions } ) => {
@@ -48,7 +48,7 @@ const SingleChat = ( { fetchAgain, setFetchAgain, toastOptions } ) => {
       setLoading(true);
 
       const response  = await axios.get(
-        `https://mernchat-rtv3.onrender.com/api/message/${selectedChat._id}`,
+        `http://localhost:6600/api/message/${selectedChat._id}`,
         config
       );
 
@@ -76,7 +76,7 @@ const SingleChat = ( { fetchAgain, setFetchAgain, toastOptions } ) => {
         };
         setNewMessage("");
         const { data } = await axios.post(
-          "https://mernchat-rtv3.onrender.com/api/message",
+          "http://localhost:6600/api/message",
           {
             content: newMessage,
             chatId: selectedChat,
