@@ -221,7 +221,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
           Authorization: `Bearer ${user.token}`,
         },
       };
-      const { data } = await axios.post(`https://mernchat-rtv3.onrender.com/api/chat`, { userId }, config);
+      const { data } = await axios.post(`http://localhost:6600/api/chat`, { userId }, config);
 
       if (!chats.find((c) => c._id === data._id)) setChats([data, ...chats]);
       setSelectedChat( data );
