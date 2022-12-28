@@ -20,9 +20,9 @@ const Authentification = () => {
   const [ hiden, setHiden ] = useState( true )
   
   const navigateTo = useNavigate()
-  let regexName = /^(\w {3,20})$/;
-  let regexEmail = /^(\w\s\d {3,50})@(\w\d{3,20})\.(\w {2,5})$/;
-  let regexPassword = /^(\w\d\s {8,20})$/;
+  let regexName = /^(\w{3,20})$/;
+  let regexEmail = /^([a-zA-Z._\-0-9]{3,50})@([a-zA-Z0-9]{3,20})\.([a-zA-Z]{2,5})$/;
+  let regexPassword = /^([ #-ù]{8,20})$/i;
   
   const toastOptions = {
     position: "bottom-right",
@@ -70,26 +70,32 @@ const Authentification = () => {
   const changeTabs = (event, newTab) => {
     setValue( newTab )
   }
-  const submitHandler = async() => {
+  const submitHandler = async () => {
+    let iscorrect = true;
     setUpload( true )
     if ( !SignName || !SignEmail || !SignPassword || !SignConfirmPassword ) {
+      iscorrect = false;
       toast.warning( 'please complete all the field', toastOptions )
       setUpload(false)
     }
     if ( SignPassword !== SignConfirmPassword ) {
+      iscorrect = false;
       toast.warning('please enter the some password', toastOptions)
       setUpload(false)
     }
     if ( !regexName.test( SignName ) ) {
+      iscorrect = false;
         toast.error(`Please enter a Valid Name`)
     }
     if ( !regexEmail.test( SignEmail ) ) {
+      iscorrect = false;
       toast.error(`Please enter a valid Email`)
     }
     if ( !regexPassword.test( SignPassword ) ) {
+      iscorrect = false;
       toast.error(`Password must have 8 or over than 8 characters`)
     }
-    
+    if ( !iscorrect ) return;
     try {
       const config = {
         headers: {
