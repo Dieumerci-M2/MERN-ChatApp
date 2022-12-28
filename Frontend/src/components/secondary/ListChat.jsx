@@ -21,7 +21,7 @@ const ListChat = ( {fetchAgain, toastOptions } ) => {
         },
       };
 
-      const response = await axios.get("http://localhost:6600/api/chat", config);
+      const response = await axios.get("https://mernchat-backend.onrender.com/api/chat", config);
       
       const { data } = response;
       setChats( data );

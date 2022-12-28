@@ -46,7 +46,7 @@ export default function Drawer({toastOptions, user, accessChat, loadingChat}) {
         },
       }
     
-      const reponse  = await axios.get( `http://localhost:6600/api/user?search=${ search }`, config )
+      const reponse  = await axios.get( `https://mernchat-backend.onrender.com/api/user?search=${ search }`, config )
       const {data} = reponse
       setLoading(false)
       setSearchResult( data )

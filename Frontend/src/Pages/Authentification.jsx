@@ -20,7 +20,9 @@ const Authentification = () => {
   const [ hiden, setHiden ] = useState( true )
   
   const navigateTo = useNavigate()
-
+  let regexName = /^(\w {3,20})$/;
+  let regexEmail = /^(\w\s\d {3,50})@(\w\d{3,20})\.(\w {2,5})$/;
+  let regexPassword = /^(\w\d\s {8,20})$/;
   
   const toastOptions = {
     position: "bottom-right",
@@ -49,7 +51,7 @@ const Authentification = () => {
         mode : 'cors'
        }
     
-      const { data } = await axios.post( "http://localhost:6600/api/user/login",
+      const { data } = await axios.post( "https://mernchat-backend.onrender.com/api/user/login",
         { email: LogEmail, password: LogPassword }, config )
       
        toast.success( 'registration successful', toastOptions )
@@ -78,6 +80,15 @@ const Authentification = () => {
       toast.warning('please enter the some password', toastOptions)
       setUpload(false)
     }
+    if ( !regexName.test( SignName ) ) {
+        toast.error(`Please enter a Valid Name`)
+    }
+    if ( !regexEmail.test( SignEmail ) ) {
+      toast.error(`Please enter a valid Email`)
+    }
+    if ( !regexPassword.test( SignPassword ) ) {
+      toast.error(`Password must have 8 or over than 8 characters`)
+    }
     
     try {
       const config = {
@@ -87,7 +98,7 @@ const Authentification = () => {
         mode : 'cors'
       }
   
-      const data  = await (fetch( 'http://localhost:6600/api/user', {
+      const data  = await (fetch( 'https://mernchat-backend.onrender.com/api/user', {
         method: 'POST',
         ...config,
         body: new URLSearchParams( { nom : SignName, email : SignEmail, password : SignPassword})
@@ -256,7 +267,6 @@ const Authentification = () => {
                     </InputAdornment>
                   } }
                 >
-
                 </TextField>
               </Stack>
               <Stack id='pic' mt= {2} mb= {2}>
