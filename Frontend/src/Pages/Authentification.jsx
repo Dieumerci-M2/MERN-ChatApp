@@ -9,13 +9,13 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 const Authentification = () => {
   const [ value, setValue ] = useState( 0 )
-  const [ LogEmail, setLogEmail ] = useState()
-  const [ LogPassword, setLogPassword ] = useState()
-  const [ SignName, setSignName ] = useState()
-  const [ SignEmail, setSignEmail ] = useState()
-  const [ SignPassword, setSignPassword ] = useState()
-  const [ SignConfirmPassword, setSignConfirmPassword ] = useState()
-  const [ pic, setPic ] = useState()
+  const [ LogEmail, setLogEmail ] = useState('')
+  const [ LogPassword, setLogPassword ] = useState('')
+  const [ SignName, setSignName ] = useState('')
+  const [ SignEmail, setSignEmail ] = useState('')
+  const [ SignPassword, setSignPassword ] = useState('')
+  const [ SignConfirmPassword, setSignConfirmPassword ] = useState('')
+  const [ pic, setPic ] = useState('')
   const [upload, setUpload] = useState(false)
   const [ hiden, setHiden ] = useState( true )
   
@@ -37,7 +37,7 @@ const Authentification = () => {
   }
   const ConnectHandler = async() => {
     setUpload( true )
-    if ( !LogEmail || !LogPassword ) {
+    if ( LogEmail.length === 0 || LogPassword.length === 0 ) {
       toast.error( 'complete all the field' , toastOptions)
       setUpload( false )
       return
@@ -73,7 +73,7 @@ const Authentification = () => {
   const submitHandler = async () => {
     let iscorrect = true;
     setUpload( true )
-    if ( !SignName || !SignEmail || !SignPassword || !SignConfirmPassword ) {
+    if ( SignName.length === 0 || SignEmail.length === 0 || SignPassword.length === 0 || SignConfirmPassword.length === 0 ) {
       iscorrect = false;
       toast.warning( 'please complete all the field', toastOptions )
       setUpload(false)
@@ -85,15 +85,15 @@ const Authentification = () => {
     }
     if ( !regexName.test( SignName ) ) {
       iscorrect = false;
-        toast.error(`Please enter a Valid Name`)
+        toast.error(`Please enter a Valid Name`, toastOptions)
     }
     if ( !regexEmail.test( SignEmail ) ) {
       iscorrect = false;
-      toast.error(`Please enter a valid Email`)
+      toast.error(`Please enter a valid Email`, toastOptions)
     }
     if ( !regexPassword.test( SignPassword ) ) {
       iscorrect = false;
-      toast.error(`Password must have 8 or over than 8 characters`)
+      toast.error(`Password must have 8 or over than 8 characters` , toastOptions)
     }
     if ( !iscorrect ) return;
     try {
