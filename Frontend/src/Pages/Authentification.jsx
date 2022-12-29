@@ -74,14 +74,14 @@ const Authentification = () => {
     let iscorrect = true;
     setUpload( true )
     if ( SignName.length === 0 || SignEmail.length === 0 || SignPassword.length === 0 || SignConfirmPassword.length === 0 ) {
-      iscorrect = false;
       toast.warning( 'please complete all the field', toastOptions )
-      setUpload(false)
+      setUpload( false )
+      return;
     }
     if ( SignPassword !== SignConfirmPassword ) {
       iscorrect = false;
       toast.warning('please enter the some password', toastOptions)
-      setUpload(false)
+      setUpload( false )
     }
     if ( !regexName.test( SignName ) ) {
       iscorrect = false;
@@ -234,7 +234,8 @@ const Authentification = () => {
                   label='Email'
                   variant='outlined'
                   size='small' type='mail'
-                  required={ true } onChange={ ( e ) => setSignEmail( e.target.value ) }>
+                  required={ true }
+                  onChange={ ( e ) => setSignEmail( e.target.value ) }>
                   
                 </TextField>
                 <TextField
